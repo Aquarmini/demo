@@ -6,36 +6,27 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
 // +----------------------------------------------------------------------
-// | Date: 2017/1/17 Time: 下午1:17
+// | Date: 2017/1/17 Time: 下午1:41
 // +----------------------------------------------------------------------
-namespace App\Http\Controllers;
+namespace App\Http\Traits;
 
-class TestController extends Controller
+trait Response
 {
-    use \App\Http\Traits\Response;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public static function success($data = [], $msg = '')
     {
-        //
+        $data['status'] = 1;
+        $data['data'] = $data;
+        $data['msg'] = $msg;
+        $data['timestamp'] = time();
+        return response()->json($data);
     }
 
-    public function index()
+    public static function error($msg = '', $status = 0, $data = [])
     {
-        return response()->json(['name' => 'Abigail', 'state' => 'CA']);
-    }
-
-    public function view()
-    {
-        return view('index');
-    }
-
-    public function json()
-    {
-        return self::success(['id' => 1]);
+        $data['status'] = $status;
+        $data['data'] = $data;
+        $data['msg'] = $msg;
+        $data['timestamp'] = time();
+        return response()->json($data);
     }
 }
