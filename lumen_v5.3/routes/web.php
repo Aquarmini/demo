@@ -14,3 +14,6 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->get('/test/index', 'TestController@index');
+$app->get('/test/view', 'TestController@view');
