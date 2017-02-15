@@ -10,3 +10,5 @@ console.log(typeof obj.test1);
 if (typeof(obj.test1) != "undefined" && typeof(obj.test1.test2) != "undefined") {
     console.log(111);
 }
+console.log(typeof "aaa");
+console.log(typeof 1222);
