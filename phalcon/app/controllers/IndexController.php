@@ -10,12 +10,22 @@
 // +----------------------------------------------------------------------
 namespace MyApp\Controllers;
 
+use MyApp\Models\User;
+
 class IndexController extends ControllerBase
 {
     public function indexAction()
     {
         $this->view->version = di('config')->version;
         return $this->view->render('index', 'index');
+    }
+
+    public function testAction()
+    {
+        $users = User::find();
+        foreach ($users as $user) {
+            dump($user->name);
+        }
     }
 
 }
