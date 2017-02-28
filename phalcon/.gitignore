@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+# @author limx
+.idea
+vendor/
+composer.lock
+.phalcon
+.env
+storage/log/*
+storage/cache/*
+storage/meta/*
