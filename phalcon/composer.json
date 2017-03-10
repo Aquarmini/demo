@@ -14,8 +14,7 @@
         "ext-phalcon": "^3.0",
         "limingxinleo/limx-func": "^2.1",
         "limingxinleo/phalcon-utils": "^1.2.0",
-        "vlucas/phpdotenv": "^2.4",
-        "limingxinleo/limx-redis": "^1.0"
+        "vlucas/phpdotenv": "^2.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",
