@@ -39,14 +39,20 @@ class Queue4Task extends QueueTask
 
     protected function rewrite($data)
     {
-        $db = MyPDO::getInstance([
+        $config = [
             'host' => '127.0.0.1',
-            'dbname' => 'phalcon',
-            'user' => 'root',
-            'pwd' => '910123',
-        ]);
-        $res = $db->fetch("SELECT * FROM user WHERE id = ?", [1]);
-        return json_encode($res);
+            'auth' => '',
+            'port' => '6379',
+        ];
+        $r = LRedis::getInstance($config);
+        // $db = MyPDO::getInstance([
+        //     'host' => '127.0.0.1',
+        //     'dbname' => 'phalcon',
+        //     'user' => 'root',
+        //     'pwd' => '910123',
+        // ]);
+        // $res = $db->fetch("SELECT * FROM user WHERE id = ?", [1]);
+        return json_encode($r->keys('*'));
     }
 
     protected function run($data)

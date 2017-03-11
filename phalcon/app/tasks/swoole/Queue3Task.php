@@ -44,7 +44,7 @@ class Queue3Task extends QueueTask
         // DB::begin();
         // DB::execute($sql, [time(), 1]);
         // DB::commit();
-        // sleep(1);
+        sleep(1);
         echo Color::success($user->name);
     }
 
