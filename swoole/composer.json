@@ -1,0 +1,7 @@
+{
+    "require": {
+        "limingxinleo/limx-pdo": "^1.2",
+        "limingxinleo/limx-redis": "^1.0",
+        "limingxinleo/limx-func": "^2.2"
+    }
+}

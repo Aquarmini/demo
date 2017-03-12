@@ -1,0 +1,111 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5efd8efaf89c0d82625bd376f9da1e79",
+    "packages": [
+        {
+            "name": "limingxinleo/limx-func",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/limingxinleo/limx-func.git",
+                "reference": "7f78065cef7a5235ad30cb7443f36909ed4951da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/limingxinleo/limx-func/7f78065cef7a5235ad30cb7443f36909ed4951da.zip",
+                "reference": "7f78065cef7a5235ad30cb7443f36909ed4951da",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "limx\\func\\": "src"
+                },
+                "files": [
+                    "src/functions/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "there are some functions",
+            "time": "2017-01-05T06:18:57+00:00"
+        },
+        {
+            "name": "limingxinleo/limx-pdo",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/limingxinleo/limx-pdo.git",
+                "reference": "0a2632c97f57733c0e0b62b0f349b2242c98845f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/limingxinleo/limx-pdo/0a2632c97f57733c0e0b62b0f349b2242c98845f.zip",
+                "reference": "0a2632c97f57733c0e0b62b0f349b2242c98845f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "limx\\tools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This is a pdo demo",
+            "time": "2016-12-23T07:43:12+00:00"
+        },
+        {
+            "name": "limingxinleo/limx-redis",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/limingxinleo/limx-redis.git",
+                "reference": "c849278c206e5009055f57626de92771f13c7a9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/limingxinleo/limx-redis/c849278c206e5009055f57626de92771f13c7a9a.zip",
+                "reference": "c849278c206e5009055f57626de92771f13c7a9a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "limx\\tools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This is a redis demo",
+            "time": "2016-11-16T08:52:00+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
