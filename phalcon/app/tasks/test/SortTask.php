@@ -11,54 +11,84 @@
 namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
+use limx\phalcon\Cli\Color;
 
 class SortTask extends Task
 {
     const NUM = 20000;
 
-    /**
-     * [mainAction desc]
-     * @desc
-     * @author limx
-     * @result
-     * php 原生方法 sort:
-     * 0.0013320446014404
-     * php 实现的方法 冒泡排序:
-     * 2.888885974884
-     * php 实现的方法 快速排序:
-     * 1.5615661144257
-     * zephir 实现的方法 冒泡排序:
-     * 1.8319699764252
-     */
     public function mainAction()
     {
-        $arr = [];
-        for ($i = 0; $i < self::NUM; $i++) {
-            $arr[] = rand(1, self::NUM);
-        }
-        $num = self::NUM - 1;
+        echo Color::head('Help:') . PHP_EOL;
+        echo Color::colorize('  PHP函数参数测试') . PHP_EOL . PHP_EOL;
 
-        $time = time() + microtime();
-        sort($arr);
-        echo "php 原生方法 sort:", PHP_EOL;
-        echo time() + microtime() - $time, PHP_EOL;
+        echo Color::head('Usage:') . PHP_EOL;
+        echo Color::colorize('  php run Test\\\\Sort [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
-        $time = time() + microtime();
-        $arr = $this->sort($arr);
-        echo "php 实现的方法 冒泡排序:", PHP_EOL;
-        echo time() + microtime() - $time, PHP_EOL;
+        echo Color::head('Actions:') . PHP_EOL;
+        echo Color::colorize('  compare     [$num]          php原生Zephir等速度比较', Color::FG_GREEN) . PHP_EOL;
 
-        $time = time() + microtime();
-        $this->qsort($arr, 0, $num);
-        echo "php 实现的方法 快速排序:", PHP_EOL;
-        echo time() + microtime() - $time, PHP_EOL;
-
-        $time = time() + microtime();
-        $arr = \Ly\Test\Hello::sort($arr);
-        echo "zephir 实现的方法 冒泡排序:", PHP_EOL;
-        echo time() + microtime() - $time, PHP_EOL;
     }
 
+    public function compareAction($params)
+    {
+        if (count($params) == 0) {
+            echo Color::error("请输入排序基数");
+            return false;
+        }
+        $count = $params[0];
+
+        echo Color::head("PHP原生实现的sort方法：") . PHP_EOL;
+        $arr = [];
+        for ($i = 0; $i < $count; $i++) {
+            $arr[] = rand(0, $count);
+        }
+        $time = microtime(true);
+        sort($arr);
+        $etime = microtime(true);
+        echo Color::colorize(sprintf("  耗时：%f", $etime - $time), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo PHP_EOL;
+
+        echo Color::head("PHP实现的冒泡排序：") . PHP_EOL;
+        $arr = [];
+        for ($i = 0; $i < $count; $i++) {
+            $arr[] = rand(0, $count);
+        }
+        $time = microtime(true);
+        $this->sort($arr);
+        $etime = microtime(true);
+        echo Color::colorize(sprintf("  耗时：%f", $etime - $time), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo PHP_EOL;
+
+        echo Color::head("PHP实现的快速排序：") . PHP_EOL;
+        $arr = [];
+        for ($i = 0; $i < $count; $i++) {
+            $arr[] = rand(0, $count);
+        }
+        $time = microtime(true);
+        $this->qsort($arr, 0, $count - 1);
+        $etime = microtime(true);
+        echo Color::colorize(sprintf("  耗时：%f", $etime - $time), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo PHP_EOL;
+
+        echo Color::head("zephir实现的冒泡排序：") . PHP_EOL;
+        $arr = [];
+        for ($i = 0; $i < $count; $i++) {
+            $arr[] = rand(0, $count);
+        }
+        $time = microtime(true);
+        \Ly\Test\SortTest::sort($arr);
+        $etime = microtime(true);
+        echo Color::colorize(sprintf("  耗时：%f", $etime - $time), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo PHP_EOL;
+    }
+
+    /**
+     * @desc   冒泡排序
+     * @author limx
+     * @param $arr
+     * @return mixed
+     */
     private function sort($arr)
     {
         $count = count($arr);
@@ -74,6 +104,13 @@ class SortTask extends Task
         return $arr;
     }
 
+    /**
+     * @desc   快排
+     * @author limx
+     * @param $arr
+     * @param $start
+     * @param $end
+     */
     private function qsort(&$arr, $start, $end)
     {
         if ($start >= $end) {
