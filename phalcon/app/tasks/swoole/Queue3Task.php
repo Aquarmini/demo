@@ -40,11 +40,17 @@ class Queue3Task extends QueueTask
     protected function run($data)
     {
         $user = User::findFirst(1);
+
+        if (is_numeric($user->name)) {
+            $sql = "UPDATE `user` SET name=name+1 WHERE id=?";
+            DB::execute($sql, [1]);
+        }
+
         // $sql = "UPDATE `user` SET name=? WHERE id=?";
         // DB::begin();
         // DB::execute($sql, [time(), 1]);
         // DB::commit();
-        sleep(1);
+        // sleep(1);
         echo Color::success($user->name);
     }
 
