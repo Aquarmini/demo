@@ -12,3 +12,7 @@ if (typeof(obj.test1) != "undefined" && typeof(obj.test1.test2) != "undefined") 
 }
 console.log(typeof "aaa");
 console.log(typeof 1222);
+
+var a=[];
+a['aa']='ff';
+console.log(a);
