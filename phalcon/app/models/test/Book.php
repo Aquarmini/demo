@@ -42,6 +42,13 @@ class Book extends \Phalcon\Mvc\Model
      */
     public $updated_at;
 
+    /**
+     *
+     * @var double
+     * @Column(type="double", length=10, nullable=true)
+     */
+    public $money;
+
 
     public function beforeCreate()
     {

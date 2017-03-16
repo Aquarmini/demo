@@ -42,6 +42,14 @@ class UserTitle extends \Phalcon\Mvc\Model
      */
     public $updated_at;
 
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->setSchema("phalcon");
+    }
+
 
     public function beforeValidationOnCreate()
     {
