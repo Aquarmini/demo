@@ -16,9 +16,10 @@ $loader
             'MyApp\Tasks' => $config->application->tasksDir,
             'MyApp\Tasks\System' => $config->application->tasksDir . 'system/',
             'MyApp\Tasks\Test' => $config->application->tasksDir . 'test/',
-            'MyApp\Tasks\Async' => $config->application->tasksDir . 'async/',
+            'MyApp\Tasks\Swoole' => $config->application->tasksDir . 'swoole/',
             'MyApp\Traits' => $config->application->traitsDir,
             'MyApp\Traits\System' => $config->application->traitsDir . 'system/',
+            'MyApp\Traits\Test' => $config->application->traitsDir . 'test/',
             'MyApp\Listeners' => $config->application->listenersDir,
             'MyApp\Listeners\System' => $config->application->listenersDir . 'system/',
         ]

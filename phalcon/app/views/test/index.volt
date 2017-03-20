@@ -42,6 +42,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/ajax') }}">Ajax返回测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/cache') }}">缓存测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/socket') }}">SOCKET.IO</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/traits/log') }}">Trait Log</a>
             </div>
             <div class="col-md-12">
                 <h3>

@@ -28,7 +28,26 @@ class ArrayTask extends Task
         echo Color::colorize('  map                     返回callback处理之后的数组', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  mergeRecursive          合并多个数组，键值相同则合并成一个数组', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  pad     [:len] [:val]   根据指定长度填充数组', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  splice  [:off] [:len]   根据指定长度切割', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function spliceAction($params)
+    {
+        if (count($params) < 2) {
+            echo Color::error("请输入起始位置 与 长度！");
+            return;
+        }
+
+        $arr = [1, 2, 3, 4, 5];
+        echo Color::head("原数组arr：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        $res = array_splice($arr, $params[0], $params[1]);
+        echo Color::head("新数组res：") . PHP_EOL;
+        echo Color::colorize(json_encode($res), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("原数组arr：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function padAction($params)
