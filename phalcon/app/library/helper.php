@@ -1,12 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | Demo [ WE CAN DO IT JUST THINK IT ]
+// | 助手函数 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2016/11/9 Time: 9:55
 // +----------------------------------------------------------------------
 use limx\phalcon\Utils\Debug;
 use limx\phalcon\Http\Response;
@@ -84,7 +82,9 @@ if (!function_exists('dispatch_error')) {
     function dispatch_error($code = 500, $msg = '')
     {
         $error_msg = app(sprintf("error-code.%d", $code));
-        if (empty($msg) && !empty($error_msg)) $msg = $error_msg;
+        if (empty($msg) && !empty($error_msg)) {
+            $msg = $error_msg;
+        }
 
         $dispatcher = di('dispatcher');
         $dispatcher->forward([

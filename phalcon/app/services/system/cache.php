@@ -1,12 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | Demo [ WE CAN DO IT JUST THINK IT ]
+// | 缓存服务 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2016/11/13 Time: 15:12
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 use Phalcon\Cache\Frontend\Data as FrontData;
 
@@ -22,14 +20,6 @@ if ($config->cache->type !== false) {
     );
     $cache = null;
     switch (strtolower($config->cache->type)) {
-        case 'file':
-            $cache = new BackFile(
-                $frontCache,
-                [
-                    "cacheDir" => $config->application->cacheDir . 'data/',
-                ]
-            );
-            break;
         case 'memcached':
             $cache = new BackMemCached(
                 $frontCache,
@@ -41,22 +31,30 @@ if ($config->cache->type !== false) {
                 ]
             );
             break;
+
         case 'redis':
             $cache = new BackRedis(
                 $frontCache,
                 [
-                    'host' => $redis->host,
-                    'port' => $redis->port,
-                    'auth' => $redis->auth,
-                    'persistent' => $redis->persistent,
-                    'index' => $redis->index,
-                    'prefix' => ':cache:',
+                    'host' => $config->redis->host,
+                    'port' => $config->redis->port,
+                    'auth' => $config->redis->auth,
+                    'persistent' => $config->redis->persistent,
+                    'index' => $config->redis->index,
+                    'prefix' => 'cache:',
                     'statsKey' => '_PHCM',
                 ]
             );
             break;
+
+        case 'file':
         default:
-            exit('Sorry! The cache engine is not support!');
+            $cache = new BackFile(
+                $frontCache,
+                [
+                    "cacheDir" => $config->application->cacheDir . 'data/',
+                ]
+            );
             break;
     }
     if ($cache !== null) {

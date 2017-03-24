@@ -2,11 +2,9 @@
 // +----------------------------------------------------------------------
 // | 数据库操作 LISTENER [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2017/2/28 Time: 下午4:02
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 namespace MyApp\Listeners\System;
 
@@ -29,7 +27,9 @@ class DbListener
     {
         $config = di('config');
         $dir = $config->application->logDir . date('Ymd');
-        if (!is_dir($dir)) mkdir($dir, 0777, true);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
         $this->_profiler = new Profiler();
         $this->_logger = new FileLogger($dir . "/db.log");
     }
@@ -60,7 +60,7 @@ class DbListener
     }
 
     /**
-     * @desc 记录sql执行日志
+     * @desc   记录sql执行日志
      * @author limx
      */
     public function logSql()
@@ -77,7 +77,7 @@ class DbListener
         $str .= "开始时间: " . $begintime . PHP_EOL;
         $str .= "结束时间: " . $endtime . PHP_EOL;
         $str .= "执行时间: " . $runtime . PHP_EOL;
-        if ($runtime > self::TIMEOUT) {
+        if ($runtime > static::TIMEOUT) {
             $this->_logger->log($str, Logger::WARNING);
         } else {
             $this->_logger->log($str, Logger::INFO);

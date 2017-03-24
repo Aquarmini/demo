@@ -31,6 +31,7 @@ class MainTask extends Task
         echo Color::colorize('  OAuth                   OAuth函数相关测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  Ymal                    Ymal函数相关测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  Sort                    排序算法测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Sphinx                  Sphinx全文检索引擎', Color::FG_GREEN) . PHP_EOL;
     }
 
 }

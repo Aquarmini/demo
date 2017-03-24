@@ -1,12 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | SESSION [ WE CAN DO IT JUST THINK IT ]
+// | SESSION 服务 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2016/11/18 Time: 15:21
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Session\Adapter\Redis as SessionRedis;
@@ -17,26 +15,27 @@ use Phalcon\Session\Adapter\Redis as SessionRedis;
 if ($config->session->type !== false) {
     $session = null;
     switch ($config->session->type) {
-        case 'file':
-            $session = new SessionAdapter();
-            $session->start();
-            break;
         case 'redis':
-            $redis = $config->redis;
             $session = new SessionRedis([
                 'uniqueId' => $config->unique_id,
-                'host' => $redis->host,
-                'port' => $redis->port,
-                'auth' => $redis->auth,
-                'persistent' => $redis->persistent,
+                'host' => $config->redis->host,
+                'port' => $config->redis->port,
+                'auth' => $config->redis->auth,
+                'persistent' => $config->redis->persistent,
                 'lifetime' => 3600,
                 'prefix' => ':session:',
-                'index' => $redis->index,
+                'index' => $config->redis->index,
             ]);
-            $session->start();
             break;
+            
+        case 'file':
+        default:
+            $session = new SessionAdapter();
+            break;
+
     }
     if ($session !== null) {
+        $session->start();
         $di->set('session', function () use ($session) {
             return $session;
         });
