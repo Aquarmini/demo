@@ -28,6 +28,8 @@ $loader
             'MyApp\Traits\Test' => $config->application->traitsDir . 'test/',
             'MyApp\Listeners' => $config->application->listenersDir,
             'MyApp\Listeners\System' => $config->application->listenersDir . 'system/',
+
+            'MyApp\Logic' => $config->application->logicDir,
         ]
     )->registerFiles(
         [

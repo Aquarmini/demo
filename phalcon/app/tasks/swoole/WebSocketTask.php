@@ -14,6 +14,7 @@ use limx\phalcon\Cli\Color;
 use MyApp\Tasks\System\WebSocketTask as WebSocket;
 use swoole_websocket_frame;
 use swoole_websocket_server;
+use MyApp\Logic\Test;
 
 class WebSocketTask extends WebSocket
 {
@@ -22,6 +23,8 @@ class WebSocketTask extends WebSocket
     protected function connect(swoole_websocket_server $server, $request)
     {
         echo "server: handshake success with fd{$request->fd}\n";
+        $test = new Test();
+        $test->index();
     }
 
     protected function message(swoole_websocket_server $server, swoole_websocket_frame $frame)

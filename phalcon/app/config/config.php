@@ -120,6 +120,8 @@ return new Config(
             'logDir' => ROOT_PATH . '/storage/log/',
             'metaDataDir' => ROOT_PATH . '/storage/meta/',
             'baseUri' => '/',
+
+            'logicDir' => APP_PATH . '/logic/',
         ],
 
         /*
