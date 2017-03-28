@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Logic;
+namespace MyApp\Logics;
 
 use limx\phalcon\Cli\Color;
 
@@ -14,7 +14,7 @@ class Test extends \Phalcon\Di\Injectable
 {
     public function index()
     {
-        echo Color::colorize("index@MyApp\\Logic\\Test", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::colorize("index@MyApp\\Logics\\Test", Color::FG_LIGHT_GREEN) . PHP_EOL;
         $cache = $this->cache;
         $cache->save('logic-test-index', ['time' => time()]);
     }

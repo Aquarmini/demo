@@ -14,11 +14,11 @@ use limx\phalcon\Cli\Color;
 use MyApp\Tasks\System\WebSocketTask as WebSocket;
 use swoole_websocket_frame;
 use swoole_websocket_server;
-use MyApp\Logic\Test;
+use MyApp\Logics\Test;
 
 class WebSocketTask extends WebSocket
 {
-    protected $port = 9501;
+    protected $port = 11521;
 
     protected function connect(swoole_websocket_server $server, $request)
     {

@@ -8,7 +8,7 @@
         <a onclick="send()" class="btn btn-default">Submit</a>
     </form>
     <script>
-        var wsUri = "ws://127.0.0.1:9501";
+        var wsUri = "ws://127.0.0.1:11521";
         websocket = new WebSocket(wsUri);
         websocket.onopen = function (evt) {
             console.log("OPEN");

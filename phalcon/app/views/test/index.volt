@@ -107,6 +107,10 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/paypal/index') }}">信用卡</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/paypal/createPayment') }}">WEB支付</a>
             </div>
+            <div class="col-md-12">
+                <h3>前端技术</h3>
+                <a type="button" class="btn btn-default" href="{{ url('test/h5/particles') }}">particles.js</a>
+            </div>
         </div>
     </div>
 {% endblock %}
