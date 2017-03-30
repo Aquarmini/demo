@@ -41,4 +41,18 @@ $router->add('/admin/:controller', [
     'controller' => 1
 ]);
 
+$router->add('/myrouter/:int/:controller/:action/:params', [
+    'namespace' => 'MyApp\Controllers\Test',
+    'controller' => 2,
+    'action' => 3,
+    'params' => 4,
+    'version' => 1,
+]);
+
+$router->add('/myrouter/:int/:controller', [
+    'namespace' => 'MyApp\Controllers\Test',
+    'controller' => 2,
+    'version' => 1,
+]);
+
 return $router;

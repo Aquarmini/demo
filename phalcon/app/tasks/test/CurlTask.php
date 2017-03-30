@@ -111,11 +111,11 @@ class CurlTask extends Task
         // 设置SSL私钥加密类型
         curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
         // 设置SSL私钥文件名
-        curl_setopt($ch, CURLOPT_SSLKEY, BASE_PATH . '/data/ssl/client.key');
+        curl_setopt($ch, CURLOPT_SSLKEY, ROOT_PATH . '/data/ssl/client.key');
         // 设置SSL私钥加密类型
         curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
         // 设置一个包含PEM格式证书的文件名
-        curl_setopt($ch, CURLOPT_SSLCERT, BASE_PATH . '/data/ssl/client.crt');
+        curl_setopt($ch, CURLOPT_SSLCERT, ROOT_PATH . '/data/ssl/client.crt');
 
         // 设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER, [

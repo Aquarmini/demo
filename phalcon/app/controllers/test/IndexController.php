@@ -23,6 +23,13 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function routerAction($key1 = "", $key2 = "", $key3 = "")
+    {
+        dump(['key1' => $key1, 'key2' => $key2, 'key3' => $key3]);
+        dump($this->dispatcher->getParam("version"));
+        dump($this->dispatcher);
+    }
+
     public function socketAction()
     {
         return $this->view->render('test/index', 'socket.io');
