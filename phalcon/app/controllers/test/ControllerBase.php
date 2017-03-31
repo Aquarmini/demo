@@ -17,7 +17,12 @@ class ControllerBase extends Controller
         ];
         if (strtolower($this->getName()) == strtolower('MyApp-Controllers-Test-index-qx2')) {
             if ($this->request->isPost()) {
-                return error("返回错误");
+                return $this->dispatcher->forward([
+                    'namespace' => 'MyApp\\Controllers',
+                    'controller' => 'error',
+                    'action' => 'json',
+                    'params' => [500, "测试错误"],
+                ]);
             } else {
                 return dispatch_error(500, "测试错误！");
             }

@@ -17,8 +17,13 @@ trait Response
         return HttpResponse::send(1, $data, '', $type);
     }
 
-    protected static function error($msg = '', $data = [], $type = 'json')
+    protected static function error($msg = '', $data = [], $status = 0, $type = 'json')
     {
-        return HttpResponse::send(0, $data, $msg, $type);
+        return HttpResponse::send($status, $data, $msg, $type);
+    }
+
+    protected static function response($status, $data, $msg, $type = 'json')
+    {
+        return HttpResponse::send($status, $data, $msg, $type);
     }
 }
