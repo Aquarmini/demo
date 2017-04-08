@@ -621,10 +621,19 @@ class IndexController extends ControllerBase
 
     public function sessionAction()
     {
+        dump($this->session->get("user-name"));
+        dump($this->session->get("user-sex"));
         $this->session->set("user-name", "Michael");
+        $this->session->set("user-sex", "boy");
         $name = $this->session->get("user-name");
         dump($name);
-        dump(session('user-name'));
+        dump($this->session->get("user-sex"));
+        $this->session->remove("user-name");
+        dump($this->session->get("user-name"));
+        dump($this->session->get("user-sex"));
+        $this->session->destroy(); // session销毁是相对于下次访问时
+        dump($this->session->get("user-name"));
+        dump($this->session->get("user-sex"));
     }
 
     public function extAction()
