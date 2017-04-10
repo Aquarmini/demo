@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -99,8 +99,8 @@ class UserMigration_100 extends Migration
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('user_username_unique', ['username'], 'UNIQUE'),
-                    new Index('user_role_id_index', ['role_id'], null)
+                    new Index('USERNAME_UNIQUE', ['username'], 'UNIQUE'),
+                    new Index('ROLE_ID_INDEX', ['role_id'], null)
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',

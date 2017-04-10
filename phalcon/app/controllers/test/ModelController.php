@@ -148,7 +148,7 @@ class ModelController extends ControllerBase
 
     /**
      * [hasManyAction desc]
-     * @desc 模型中增加下面初始化
+     * @desc   模型中增加下面初始化
      * public function initialize()
      * {
      *     $this->hasMany("id", "MyApp\\Models\\Book", "uid", ['alias' => 'book']);
@@ -215,7 +215,7 @@ class ModelController extends ControllerBase
 
     /**
      * [pageAction desc]
-     * @desc 默认的分页为全表查询，效率 低！！！
+     * @desc   默认的分页为全表查询，效率 低！！！
      * @author limx
      */
     public function pageAction()
@@ -277,7 +277,7 @@ class ModelController extends ControllerBase
 
     /**
      * [transAction desc]
-     * @desc 事务操作，当我们在一个事务内修改了数据的时候，
+     * @desc   事务操作，当我们在一个事务内修改了数据的时候，
      * 其他客户端查询到的数据是没有被修改的。知道事务被提交。
      * @author limx
      */
@@ -332,6 +332,11 @@ class ModelController extends ControllerBase
             'bind' => 1,
         ]);
         echo "NOW:", $user->name, PHP_EOL;
+    }
+
+    public function incrAction()
+    {
+        
     }
 
 }

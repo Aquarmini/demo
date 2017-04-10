@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Phalcon\Db\Column;
 use Phalcon\Db\Index;
@@ -70,7 +70,7 @@ class BookMigration_100 extends Migration
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('book_uid_index', ['uid'], null)
+                    new Index('UID_INDEX', ['uid'], null)
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
