@@ -23,6 +23,11 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function helloAction()
+    {
+        echo "HELLO WORLD!";
+    }
+
     public function pcloseAction()
     {
         $path = ROOT_PATH;

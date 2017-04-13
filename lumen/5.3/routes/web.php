@@ -18,3 +18,6 @@ $app->get('/', function () use ($app) {
 $app->get('/test/index', 'TestController@index');
 $app->get('/test/view', 'TestController@view');
 $app->get('/test/json', 'TestController@json');
+
+$app->get('/index/hello', "IndexController@hello");
+
