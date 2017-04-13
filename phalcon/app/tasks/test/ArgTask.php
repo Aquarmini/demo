@@ -17,20 +17,20 @@ class ArgTask extends Task
 {
     public function mainAction()
     {
-        echo Color::head('Help:') . PHP_EOL;
-        echo Color::colorize('  PHP函数参数测试') . PHP_EOL . PHP_EOL;
+        echo Color::head('Help:'), PHP_EOL;
+        echo Color::colorize('  PHP函数参数测试'), PHP_EOL, PHP_EOL;
 
-        echo Color::head('Usage:') . PHP_EOL;
-        echo Color::colorize('  php run Test\\\\Arg [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
+        echo Color::head('Usage:'), PHP_EOL;
+        echo Color::colorize('  php run Test\\\\Arg [action]', Color::FG_GREEN), PHP_EOL, PHP_EOL;
 
-        echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  more        不定参数测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  callfunc    传入函数测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::head('Actions:'), PHP_EOL;
+        echo Color::colorize('  more        不定参数测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  callfunc    传入函数测试', Color::FG_GREEN), PHP_EOL;
 
     }
 
     /**
-     * @desc 传入函数测试
+     * @desc   传入函数测试
      * @author limx
      */
     public function callfuncAction()
@@ -55,7 +55,7 @@ class ArgTask extends Task
     }
 
     /**
-     * @desc 不定参数测试
+     * @desc   不定参数测试
      * @author limx
      */
     public function moreAction()

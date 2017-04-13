@@ -10,10 +10,9 @@ return [
     'project-name' => 'limx-phalcon-ss-project',
     // 定时执行的脚本
     'cron-tasks' => [
-        ['task' => 'Test\\Test1', 'action' => 'main', 'params' => [], 'time' => '10:02'],
-        ['task' => 'Test\\Test2', 'action' => 'main', 'params' => [1], 'time' => ''],
+        ['task' => 'Test\\Test', 'action' => 'sleep', 'params' => [], 'time' => '10:02'],
 
-        // ['task' => 'System\\Cron', 'action' => 'test', 'params' => [], 'time' => '05:21'],
+        // ['task' => 'taskName', 'action' => 'actionName', 'params' => [], 'time' => '05:21'],
     ],
     'error-code' => [
         500 => '服务器错误！',

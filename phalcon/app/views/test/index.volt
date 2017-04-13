@@ -43,6 +43,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/cache') }}">缓存测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/socket') }}">SOCKET.IO</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/traits/log') }}">Trait Log</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/pclose') }}">无阻塞调用脚本</a>
             </div>
             <div class="col-md-12">
                 <h3>
