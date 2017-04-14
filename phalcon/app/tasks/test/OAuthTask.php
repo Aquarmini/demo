@@ -1,12 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | OAuthTask php OAuth 验证 [ WE CAN DO IT JUST THINK IT ]
+// | 测试脚本 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2017/3/4 Time: 下午8:28
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 namespace MyApp\Tasks\Test;
 

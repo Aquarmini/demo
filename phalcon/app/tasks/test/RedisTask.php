@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | Redis方法测试 [ WE CAN DO IT JUST THINK IT ]
+// | 测试脚本 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
@@ -20,16 +20,30 @@ class RedisTask extends Task
 
     public function mainAction()
     {
-        echo Color::head('Help:') . PHP_EOL;
-        echo Color::colorize('  Redis方法测试') . PHP_EOL . PHP_EOL;
+        echo Color::head('Help:'), PHP_EOL;
+        echo Color::colorize('  Redis方法测试'), PHP_EOL, PHP_EOL;
 
-        echo Color::head('Usage:') . PHP_EOL;
-        echo Color::colorize('  php run Test\\\\Redis [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
+        echo Color::head('Usage:'), PHP_EOL;
+        echo Color::colorize('  php run Test\\\\Redis [action]', Color::FG_GREEN), PHP_EOL, PHP_EOL;
 
-        echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  sadd            sadd测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  hmget           hmget测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  hget            hget测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::head('Actions:'), PHP_EOL;
+        echo Color::colorize('  sadd            sadd测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  hmget           hmget测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  hget            hget测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  multi           事务测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function multiAction()
+    {
+        $redis = $this->redisClient();
+        $redis->multi();
+        $redis->incr(self::TEST_KEY);
+        $redis->incr(self::TEST_KEY);
+        $res = $redis->exec();
+        // $res = $redis->discard();
+
+        echo Color::colorize(sprintf("执行结果:%d", $res), Color::FG_LIGHT_GREEN), PHP_EOL;
+
     }
 
     public function hgetAction()
@@ -55,7 +69,7 @@ class RedisTask extends Task
     {
         $redis = $this->redisClient();
         $keys = ['key1' => uniqid(), 'key2' => uniqid(), 'key3' => uniqid(), 'key4' => uniqid()];
-        echo Color::head('KEY值为') . PHP_EOL;
+        echo Color::head('KEY值为'), PHP_EOL;
         echo Color::colorize('  ' . self::TEST_KEY, Color::FG_LIGHT_GREEN), PHP_EOL;
         echo Color::head('设置测试数据：');
         $redis->hmset(self::TEST_KEY, $keys);
@@ -70,14 +84,14 @@ class RedisTask extends Task
     {
         $redis = $this->redisClient();
         $val = 'hello world';
-        echo Color::head('KEY值为') . PHP_EOL;
-        echo Color::colorize('  ' . self::TEST_KEY, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head('KEY值为'), PHP_EOL;
+        echo Color::colorize('  ' . self::TEST_KEY, Color::FG_LIGHT_GREEN), PHP_EOL;
         $res = $redis->sadd(self::TEST_KEY, $val);
         echo Color::head('第一次结果：');
-        echo Color::colorize('  ' . $res, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::colorize('  ' . $res, Color::FG_LIGHT_GREEN), PHP_EOL;
         $res = $redis->sadd(self::TEST_KEY, $val);
         echo Color::head('第二次结果：');
-        echo Color::colorize('  ' . $res, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::colorize('  ' . $res, Color::FG_LIGHT_GREEN), PHP_EOL;
     }
 
     private function redisClient()

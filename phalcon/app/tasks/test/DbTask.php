@@ -1,12 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | Demo [ WE CAN DO IT JUST THINK IT ]
+// | 测试脚本 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2016/12/16 Time: 13:49
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 namespace MyApp\Tasks\Test;
 
@@ -18,40 +16,50 @@ class DbTask extends Task
 {
     public function mainAction()
     {
-        // for ($i = 0; $i < 10000; $i++) {
-        //     $start = rand(1, 5);
-        //     $end = rand(5, 10);
-        //     $this->test($start, $end);
-        // }
-        // echo "FINISH\n";
+        echo Color::head('Help:') . PHP_EOL;
+        echo Color::colorize('  DB测试') . PHP_EOL . PHP_EOL;
 
-        $sql = "UPDATE book SET name=? WHERE id = ?";
-        // $res = DB::execute($sql, [111, 1], true);
-        // $res = DB::execute($sql, [11, 1]);
-        $res = DB::execWithRowCount($sql, [111, 1]);
+        echo Color::head('Usage:') . PHP_EOL;
+        echo Color::colorize('  php run Test\\\\Db [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
-        if ($res === false) {
-            echo Color::colorize("FALSE", Color::FG_LIGHT_RED) . PHP_EOL;
-        } else if ($res === true) {
-            echo Color::colorize("TRUE", Color::FG_LIGHT_CYAN) . PHP_EOL;
-        } else {
-            echo Color::colorize($res, Color::FG_LIGHT_CYAN) . PHP_EOL;
-        }
+        echo Color::head('Actions:') . PHP_EOL;
+        echo Color::colorize('  execute             执行sql并返回影响的行数', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  where               测试WHERE区间方法', Color::FG_GREEN) . PHP_EOL;
     }
 
-    public function test($start, $end)
+    public function executeAction()
     {
-        $sql = "SELECT * FROM book WHERE uid > ? AND uid < ?;";
-        $res = DB::query($sql, [$start, $end]);
+        $val = uniqid();
+        $sql = "UPDATE book SET name=? WHERE id = ?";
+
+        for ($i = 0; $i < 2; $i++) {
+            $res = DB::execWithRowCount($sql, [$val, 1]);
+            echo Color::colorize("影响的行数：" . $res, Color::FG_LIGHT_CYAN), PHP_EOL;
+        }
+
+    }
+
+    public function whereAction($params)
+    {
+        if (count($params) < 2) {
+            echo Color::error("请输入需要查询的区间！");
+            return;
+        }
+        $start = $params[0];
+        $end = $params[1];
+
+        $sql1 = "SELECT * FROM book WHERE uid > ? AND uid < ?;";
+        $res = DB::query($sql1, [$start, $end]);
         $count1 = count($res);
 
-        $sql = "SELECT * FROM book WHERE uid > {$start} AND uid < {$end};";
-        $res = DB::query($sql);
+        $sql2 = "SELECT * FROM book WHERE uid > {$start} AND uid < {$end};";
+        $res = DB::query($sql2);
         $count2 = count($res);
 
-        if ($count1 !== $count2 || $count1 = 0) {
-            echo $count1 . '|' . $count2 . "\n";
-        }
+        echo Color::head("结果："), PHP_EOL;
+        echo Color::colorize(sprintf("%s搜索结果的行数：%d", $sql1, $count1), Color::FG_LIGHT_CYAN), PHP_EOL;
+        echo Color::colorize(sprintf("%s搜索结果的行数：%d", $sql2, $count2), Color::FG_LIGHT_CYAN), PHP_EOL;
+
     }
 
 }
