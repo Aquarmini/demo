@@ -1,20 +1,22 @@
 <?php
 // +----------------------------------------------------------------------
-// | 默认控制器 [ WE CAN DO IT JUST THINK IT ]
+// | Model基类 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
 // +----------------------------------------------------------------------
-namespace MyApp\Controllers;
+namespace MyApp\Models;
 
-use MyApp\Logics\Common;
-
-class IndexController extends Controller
+class Model extends \Phalcon\Mvc\Model
 {
-    public function indexAction()
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
     {
-        $this->view->version = (new Common())->version();
-        return $this->view->render('index', 'index');
+
     }
+
 }

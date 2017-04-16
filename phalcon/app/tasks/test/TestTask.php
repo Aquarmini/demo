@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace MyApp\Tasks\Test;
 
+use limx\phalcon\Cli\Color;
 use Phalcon\Cli\Task;
 
 class TestTask extends Task
