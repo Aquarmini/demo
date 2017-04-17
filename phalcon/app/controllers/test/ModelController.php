@@ -1,12 +1,12 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
-use MyApp\Models\Test\Role;
-use MyApp\Models\Test\Title;
-use MyApp\Models\Test\User;
-use MyApp\Models\Test\Book;
-use MyApp\Models\Test\UserTitle;
+use App\Models\Role;
+use App\Models\Title;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\UserTitle;
 
 use limx\phalcon\DB;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
@@ -151,7 +151,7 @@ class ModelController extends ControllerBase
      * @desc   模型中增加下面初始化
      * public function initialize()
      * {
-     *     $this->hasMany("id", "MyApp\\Models\\Book", "uid", ['alias' => 'book']);
+     *     $this->hasMany("id", "App\\Models\\Book", "uid", ['alias' => 'book']);
      * }
      * @author limx
      */
@@ -259,7 +259,7 @@ class ModelController extends ControllerBase
         $page = $this->request->get('page');
         $builder = $this->modelsManager->createBuilder()
             ->columns('id, name')
-            ->from('MyApp\Models\Test\User')
+            ->from('App\Models\Test\User')
             ->orderBy('name');
 
         $paginator = new QueryBuilder(
@@ -336,7 +336,7 @@ class ModelController extends ControllerBase
 
     public function incrAction()
     {
-        
+
     }
 
 }

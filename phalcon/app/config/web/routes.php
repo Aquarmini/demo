@@ -1,48 +1,48 @@
 <?php
 /**
  * 路由文件
- * 必须精确到控制器 MyApp\Controllers\IndexController除外
+ * 必须精确到控制器 App\Controllers\IndexController除外
  */
 $router = new Phalcon\Mvc\Router(false);
 
 $router->add('/:controller/:action/:params', [
-    'namespace' => 'MyApp\Controllers',
+    'namespace' => 'App\Controllers',
     'controller' => 1,
     'action' => 2,
     'params' => 3,
 ]);
 
 $router->add('/:controller', [
-    'namespace' => 'MyApp\Controllers',
+    'namespace' => 'App\Controllers',
     'controller' => 1
 ]);
 
 $router->add('/test/:controller/:action/:params', [
-    'namespace' => 'MyApp\Controllers\Test',
+    'namespace' => 'App\Controllers\Test',
     'controller' => 1,
     'action' => 2,
     'params' => 3,
 ]);
 
 $router->add('/test/:controller', [
-    'namespace' => 'MyApp\Controllers\Test',
+    'namespace' => 'App\Controllers\Test',
     'controller' => 1
 ]);
 
 $router->add('/admin/:controller/:action/:params', [
-    'namespace' => 'MyApp\Controllers\Admin',
+    'namespace' => 'App\Controllers\Admin',
     'controller' => 1,
     'action' => 2,
     'params' => 3,
 ]);
 
 $router->add('/admin/:controller', [
-    'namespace' => 'MyApp\Controllers\Admin',
+    'namespace' => 'App\Controllers\Admin',
     'controller' => 1
 ]);
 
 $router->add('/myrouter/:int/:controller/:action/:params', [
-    'namespace' => 'MyApp\Controllers\Test',
+    'namespace' => 'App\Controllers\Test',
     'controller' => 2,
     'action' => 3,
     'params' => 4,
@@ -50,7 +50,7 @@ $router->add('/myrouter/:int/:controller/:action/:params', [
 ]);
 
 $router->add('/myrouter/:int/:controller', [
-    'namespace' => 'MyApp\Controllers\Test',
+    'namespace' => 'App\Controllers\Test',
     'controller' => 2,
     'version' => 1,
 ]);

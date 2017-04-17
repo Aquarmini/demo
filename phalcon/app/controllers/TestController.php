@@ -1,10 +1,10 @@
 <?php
 
-namespace MyApp\Controllers;
+namespace App\Controllers;
 /**
  * Class TestController
  * 因为有Test文件夹的原因，导致此控制器失效
- * @package MyApp\Controllers
+ * @package App\Controllers
  */
 class TestController extends ControllerBase
 {

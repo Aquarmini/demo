@@ -8,13 +8,13 @@
 // +----------------------------------------------------------------------
 // | Date: 2017/2/25 Time: 上午10:03
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Swoole;
+namespace App\Tasks\Swoole;
 
 use limx\phalcon\Cli\Color;
-use MyApp\Tasks\System\WebSocketTask as WebSocket;
+use App\Tasks\System\WebSocketTask as WebSocket;
 use swoole_websocket_frame;
 use swoole_websocket_server;
-use MyApp\Logics\Test;
+use App\Logics\Test;
 
 class WebSocketTask extends WebSocket
 {

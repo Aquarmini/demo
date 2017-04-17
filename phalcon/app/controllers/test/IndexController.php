@@ -1,13 +1,13 @@
 <?php
 //declare(strict_types = 1);
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use limx\tools\LRedis;
 use limx\tools\MyRedis;
 use limx\func\Match;
 use limx\func\Str;
 use limx\phalcon\DB;
-use MyApp\Models\Test\User;
+use App\Models\User;
 use limx\func\Curl;
 use limx\tools\MyPDO;
 
@@ -438,7 +438,7 @@ class IndexController extends ControllerBase
         //        $dispatcher = di('dispatcher');
         //        $dispatcher->forward(
         //            [
-        //                'namespace' => 'MyApp\Controllers',
+        //                'namespace' => 'App\Controllers',
         //                'controller' => 'error',
         //                'action' => 'index',
         //                'params' => [$code, $msg],

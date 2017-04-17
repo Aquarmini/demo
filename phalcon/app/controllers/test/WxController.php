@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use limx\tools\wx\OAuth;
 /** 微信支付 S */

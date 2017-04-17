@@ -8,10 +8,10 @@
 // +----------------------------------------------------------------------
 // | Date: 2017/2/23 Time: 下午2:39
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Swoole;
+namespace App\Tasks\Swoole;
 
-use MyApp\Models\Test\User;
-use MyApp\Tasks\System\QueueTask;
+use App\Models\Test\User;
+use App\Tasks\System\QueueTask;
 use limx\tools\LRedis;
 use limx\phalcon\Cli\Color;
 use limx\phalcon\DB;

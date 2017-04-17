@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use limx\func\Curl;

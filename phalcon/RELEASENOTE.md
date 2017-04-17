@@ -2,13 +2,25 @@
 
 ## [Unreleased]
 ### Added
+
+### Changed
+ 
+### Fixed
+
+## [1.7.3]
+### Added
 * 增加model层基类
-* 解决phalcon新建model指定继承类时出现BUG的问题
+* 增加工具目录
+* 增加DB工具类
+* 增加Redis工具类
 
 ### Changed
 * 修改Controller基类为Controller.php
+* 【严重】修改项目命名空间MyApp->App
+* 去除修改命名空间的脚本
  
 ### Fixed
+* 解决phalcon新建model指定继承类时出现BUG的问题
 * 解决phalcon新建model会删除文件上方use的类库 [devtools](https://github.com/limingxinleo/phalcon-devtools.git)
 
 ## [1.7.0]

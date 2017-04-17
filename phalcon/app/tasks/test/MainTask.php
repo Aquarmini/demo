@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace App\Tasks\Test;
 
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
@@ -29,6 +29,7 @@ class MainTask extends Task
         echo Color::colorize('  Db                      DB相关测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Match                   正则表达式测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Math                    数学方法测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  MongoDB                 MongoDB测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Mysql                   Mysql测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  OAuth                   OAuth函数相关测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Password                密码函数测试', Color::FG_GREEN), PHP_EOL;

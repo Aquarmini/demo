@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace App\Tasks\Test;
 
 use limx\phalcon\Cli\Color;
 use Phalcon\Cli\Task;

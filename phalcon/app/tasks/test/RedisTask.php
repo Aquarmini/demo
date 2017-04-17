@@ -6,10 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace App\Tasks\Test;
 
 use limx\phalcon\Redis;
 use limx\tools\LRedis;
+use App\Utils\Redis as RedisUtil;
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
 use limx\phalcon\Cli\Color;
@@ -31,6 +32,22 @@ class RedisTask extends Task
         echo Color::colorize('  hmget           hmget测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  hget            hget测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  multi           事务测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  static          静态方法', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function staticAction()
+    {
+        $res = RedisUtil::keys("*");
+        echo Color::colorize(sprintf("当前结果集:%s", json_encode($res)), Color::FG_LIGHT_GREEN), PHP_EOL;
+        $res = RedisUtil::del(self::TEST_KEY);
+        $res = RedisUtil::keys("*");
+        echo Color::colorize(sprintf("删除后结果集:%s", json_encode($res)), Color::FG_LIGHT_GREEN), PHP_EOL;
+        $res = RedisUtil::set(self::TEST_KEY, 'hello world!');
+        $res = RedisUtil::keys("*");
+        echo Color::colorize(sprintf("新增后结果集:%s", json_encode($res)), Color::FG_LIGHT_GREEN), PHP_EOL;
+        $res = RedisUtil::get(self::TEST_KEY);
+        echo Color::colorize(sprintf("新增后结果:%s", $res), Color::FG_LIGHT_GREEN), PHP_EOL;
+
     }
 
     public function multiAction()

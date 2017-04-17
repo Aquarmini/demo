@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.7.1',
+        'version' => '1.7.3',
 
         /*
         |--------------------------------------------------------------------------
@@ -96,6 +96,26 @@ return new Config(
 
         /*
         |--------------------------------------------------------------------------
+        | MongoDB Environment
+        |--------------------------------------------------------------------------
+        |
+        | This value determines the "environment" your redis.
+        |
+        */
+        'mongo' => [
+            'host' => env('MONGODB_HOST', '127.0.0.1'),
+            'port' => env('MONGODB_PORT', '27017'),
+            'connect' => env('MONGODB_CONNECT', true),
+            'timeout' => env('MONGODB_TIMEOUT', null),
+            'replicaSet' => env('MONGODB_REPLICA_SET', null),
+            'username' => env('MONGODB_USERNAME', null),
+            'password' => env('MONGODB_PASSWORD', null),
+            'db' => env('MONGODB_DB', null),
+            'collection' => env('MONGODB_COLLECTION', null),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
         | Application Environment
         |--------------------------------------------------------------------------
         |
@@ -107,19 +127,20 @@ return new Config(
         'application' => [
             'configDir' => APP_PATH . '/config/',
             'controllersDir' => APP_PATH . '/controllers/',
-            'modelsDir' => APP_PATH . '/models/',
-            'viewsDir' => APP_PATH . '/views/',
-            'tasksDir' => APP_PATH . '/tasks/',
-            'pluginsDir' => APP_PATH . '/plugins/',
             'libraryDir' => APP_PATH . '/library/',
             'listenersDir' => APP_PATH . '/listeners/',
             'logicsDir' => APP_PATH . '/logics/',
-            'traitsDir' => APP_PATH . '/traits/',
+            'modelsDir' => APP_PATH . '/models/',
             'servicesDir' => APP_PATH . '/services/',
+            'tasksDir' => APP_PATH . '/tasks/',
+            'traitsDir' => APP_PATH . '/traits/',
+            'utilsDir' => APP_PATH . '/utils/',
+            'viewsDir' => APP_PATH . '/views/',
+
             'cacheDir' => ROOT_PATH . '/storage/cache/',
-            'migrationsDir' => ROOT_PATH . '/storage/migrations/',
             'logDir' => ROOT_PATH . '/storage/log/',
             'metaDataDir' => ROOT_PATH . '/storage/meta/',
+            'migrationsDir' => ROOT_PATH . '/storage/migrations/',
             'baseUri' => '/',
         ],
 
@@ -213,11 +234,13 @@ return new Config(
                 'system/error.php',
                 'system/cookies.php',
                 'system/crypt.php',
+                'system/redis.php',
             ],
             'cli' => [
                 'system/cache.php',
                 'system/error.php',
                 'system/crypt.php',
+                'system/redis.php',
             ],
         ],
 

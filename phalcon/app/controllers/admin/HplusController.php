@@ -1,9 +1,9 @@
 <?php
 
-namespace MyApp\Controllers\Admin;
+namespace App\Controllers\Admin;
 
-use MyApp\Controllers\ControllerBase;
-use MyApp\Models\Test\User;
+use App\Controllers\ControllerBase;
+use App\Models\Test\User;
 
 class HplusController extends ControllerBase
 {

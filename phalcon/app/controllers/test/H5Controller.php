@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
-use MyApp\Controllers\Test\ControllerBase;
+use App\Controllers\Test\ControllerBase;
 
 class H5Controller extends ControllerBase
 {

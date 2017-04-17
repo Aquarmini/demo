@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use Sms\Request\V20160927 as Sms;
 

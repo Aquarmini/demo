@@ -1,9 +1,9 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use Phalcon\Mvc\Controller;
-use MyApp\Traits\System\Response;
+use App\Traits\System\Response;
 
 class ControllerBase extends Controller
 {
@@ -15,10 +15,10 @@ class ControllerBase extends Controller
         $this->settings = [
             "mySetting" => "value",
         ];
-        if (strtolower($this->getName()) == strtolower('MyApp-Controllers-Test-index-qx2')) {
+        if (strtolower($this->getName()) == strtolower('App-Controllers-Test-index-qx2')) {
             if ($this->request->isPost()) {
                 return $this->dispatcher->forward([
-                    'namespace' => 'MyApp\\Controllers',
+                    'namespace' => 'App\\Controllers',
                     'controller' => 'error',
                     'action' => 'json',
                     'params' => [500, "测试错误"],

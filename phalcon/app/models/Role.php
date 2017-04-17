@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace App\Models;
 
-class Title extends \Phalcon\Mvc\Model
+class Role extends Model
 {
 
     /**
@@ -62,7 +62,7 @@ class Title extends \Phalcon\Mvc\Model
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Title[]
+     * @return Role[]
      */
     public static function find($parameters = null)
     {
@@ -73,7 +73,7 @@ class Title extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Title
+     * @return Role
      */
     public static function findFirst($parameters = null)
     {
@@ -87,7 +87,7 @@ class Title extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'title';
+        return 'role';
     }
 
 }

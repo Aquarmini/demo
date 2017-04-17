@@ -9,7 +9,7 @@
 // | Date: 2017/2/3 Time: 下午8:48
 // +----------------------------------------------------------------------
 
-namespace MyApp\Tasks\Swoole;
+namespace App\Tasks\Swoole;
 
 use Phalcon\Cli\Task;
 use limx\tools\LRedis;

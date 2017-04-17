@@ -1,9 +1,9 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
-use MyApp\Traits\System\Response;
-use MyApp\Traits\Test\Log;
+use App\Traits\System\Response;
+use App\Traits\Test\Log;
 
 class TraitsController extends \Phalcon\Mvc\Controller
 {

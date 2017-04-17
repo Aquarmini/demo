@@ -6,11 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace App\Tasks\Test;
 
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
-use MyApp\Logics\Test;
+use App\Logics\Test;
 
 class MysqlTask extends Task
 {

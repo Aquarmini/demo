@@ -1,30 +1,18 @@
 <?php
 // +----------------------------------------------------------------------
-// | 控制器基类 [ WE CAN DO IT JUST THINK IT ]
+// | Redis工具类 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace App\Controllers;
+namespace App\Utils;
 
-use App\Traits\System\Response;
-
-class Controller extends \Phalcon\Mvc\Controller
+class Redis
 {
-    use Response;
-
-    public function initialize()
+    public static function __callStatic($name, $arguments)
     {
-    }
-
-    public function beforeExecuteRoute()
-    {
-        // 在每一个找到的动作前执行
-    }
-
-    public function afterExecuteRoute()
-    {
-        // 在每一个找到的动作后执行
+        $redis = di('redis');
+        return call_user_func_array([$redis, $name], $arguments);
     }
 }

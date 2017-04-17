@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace App\Models;
 
-class Book extends \Phalcon\Mvc\Model
+class Title extends Model
 {
 
     /**
@@ -13,13 +13,6 @@ class Book extends \Phalcon\Mvc\Model
      * @Column(type="integer", length=10, nullable=false)
      */
     public $id;
-
-    /**
-     *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    public $uid;
 
     /**
      *
@@ -43,11 +36,12 @@ class Book extends \Phalcon\Mvc\Model
     public $updated_at;
 
     /**
-     *
-     * @var double
-     * @Column(type="double", length=10, nullable=true)
+     * Initialize method for model.
      */
-    public $money;
+    public function initialize()
+    {
+        $this->setSchema("phalcon");
+    }
 
 
     public function beforeCreate()
@@ -64,17 +58,11 @@ class Book extends \Phalcon\Mvc\Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-
-    public function initialize()
-    {
-        $this->belongsTo('uid', 'MyApp\\Models\\Test\\User', 'id', ['alias' => 'user']);
-    }
-
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Book[]
+     * @return Title[]
      */
     public static function find($parameters = null)
     {
@@ -85,7 +73,7 @@ class Book extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Book
+     * @return Title
      */
     public static function findFirst($parameters = null)
     {
@@ -99,7 +87,7 @@ class Book extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'book';
+        return 'title';
     }
 
 }

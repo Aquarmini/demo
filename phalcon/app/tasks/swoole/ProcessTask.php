@@ -9,7 +9,7 @@
 // | Date: 2017/2/23 Time: 下午2:39
 // +----------------------------------------------------------------------
 declare(ticks = 1);
-namespace MyApp\Tasks\Swoole;
+namespace App\Tasks\Swoole;
 
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;

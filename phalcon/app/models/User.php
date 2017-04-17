@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace App\Models;
 
-class UserTitle extends \Phalcon\Mvc\Model
+class User extends Model
 {
 
     /**
@@ -16,60 +16,60 @@ class UserTitle extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
      */
-    public $uid;
-
-    /**
-     *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    public $title_id;
+    public $username;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $password;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $email;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
+     */
+    public $role_id;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", nullable=true)
      */
     public $updated_at;
 
     /**
-     * Initialize method for model.
+     * Validations and business logic
+     *
+     * @return boolean
      */
-    public function initialize()
+    public function validation()
     {
-        $this->setSchema("phalcon");
-    }
-
-
-    public function beforeValidationOnCreate()
-    {
-        $res = $this->findFirst([
-            'conditions' => 'uid=?0 AND title_id=?1',
-            'bind' => [
-                $this->uid,
-                $this->title_id
-            ],
-        ]);
-        if ($res) {
-            $message = new \Phalcon\Mvc\Model\Message(
-                "Sorry, The relation is existed",
-                "type",
-                "MyType"
-            );
-
-            $this->appendMessage($message);
-            return false;
-        }
         return true;
     }
 
@@ -88,11 +88,23 @@ class UserTitle extends \Phalcon\Mvc\Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
+
+    public function initialize()
+    {
+        $this->hasMany('id', 'App\\Models\\Book', 'uid', ['alias' => 'book']);
+        $this->hasManyToMany(
+            'id',
+            'App\\Models\\UserTitle', 'uid', 'title_id',
+            'App\\Models\\Title', 'id',
+            ['alias' => 'title']
+        );
+    }
+
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return UserTitle[]
+     * @return User[]
      */
     public static function find($parameters = null)
     {
@@ -103,7 +115,7 @@ class UserTitle extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return UserTitle
+     * @return User
      */
     public static function findFirst($parameters = null)
     {
@@ -117,7 +129,7 @@ class UserTitle extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'user_title';
+        return 'user';
     }
 
 }

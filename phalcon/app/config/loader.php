@@ -14,21 +14,27 @@ $loader = new \Phalcon\Loader();
 $loader
     ->registerNamespaces(
         [
-            'MyApp\Controllers' => $config->application->controllersDir,
-            'MyApp\Controllers\Admin' => $config->application->controllersDir . 'admin/',
-            'MyApp\Controllers\Test' => $config->application->controllersDir . 'test/',
-            'MyApp\Models' => $config->application->modelsDir,
-            'MyApp\Models\Test' => $config->application->modelsDir . 'test/',
-            'MyApp\Tasks' => $config->application->tasksDir,
-            'MyApp\Tasks\System' => $config->application->tasksDir . 'system/',
-            'MyApp\Tasks\Test' => $config->application->tasksDir . 'test/',
-            'MyApp\Tasks\Swoole' => $config->application->tasksDir . 'swoole/',
-            'MyApp\Traits' => $config->application->traitsDir,
-            'MyApp\Traits\System' => $config->application->traitsDir . 'system/',
-            'MyApp\Traits\Test' => $config->application->traitsDir . 'test/',
-            'MyApp\Listeners' => $config->application->listenersDir,
-            'MyApp\Listeners\System' => $config->application->listenersDir . 'system/',
-            'MyApp\Logics' => $config->application->logicsDir,
+            'App\Controllers' => $config->application->controllersDir,
+            'App\Controllers\Admin' => $config->application->controllersDir . 'admin/',
+            'App\Controllers\Test' => $config->application->controllersDir . 'test/',
+
+            'App\Listeners' => $config->application->listenersDir,
+            'App\Listeners\System' => $config->application->listenersDir . 'system/',
+
+            'App\Logics' => $config->application->logicsDir,
+
+            'App\Models' => $config->application->modelsDir,
+
+            'App\Tasks' => $config->application->tasksDir,
+            'App\Tasks\System' => $config->application->tasksDir . 'system/',
+            'App\Tasks\Test' => $config->application->tasksDir . 'test/',
+            'App\Tasks\Swoole' => $config->application->tasksDir . 'swoole/',
+
+            'App\Traits' => $config->application->traitsDir,
+            'App\Traits\System' => $config->application->traitsDir . 'system/',
+            'App\Traits\Test' => $config->application->traitsDir . 'test/',
+
+            'App\Utils' => $config->application->utilsDir,
         ]
     )->registerFiles(
         [

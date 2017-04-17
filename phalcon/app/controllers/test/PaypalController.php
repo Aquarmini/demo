@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Controllers\Test;
+namespace App\Controllers\Test;
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
