@@ -10,6 +10,8 @@ use limx\phalcon\DB;
 use App\Models\User;
 use limx\func\Curl;
 use limx\tools\MyPDO;
+use Phalcon\Logger\Adapter\Firephp;
+use Phalcon\Logger;
 
 class IndexController extends ControllerBase
 {
@@ -21,6 +23,13 @@ class IndexController extends ControllerBase
     public function infoAction()
     {
         echo phpinfo();
+    }
+
+    public function firephpAction()
+    {
+        $logger = new Firephp();
+        $logger->log(Logger::ERROR, "This is an error");
+        $logger->error("This is another error");
     }
 
     public function helloAction()

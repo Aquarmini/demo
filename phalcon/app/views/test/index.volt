@@ -73,6 +73,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/traits/dispatch') }}">Dispatch</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/swoole/websocket') }}">Swoole.Websocket</a>
                 <a type="button" class="btn btn-default" href="{{ url('/myrouter/4/index/router/11/2') }}">自定义路由</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/firephp') }}">firephp</a>
             </div>
             <div class="col-md-12">
                 <h3>
