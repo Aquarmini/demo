@@ -40,9 +40,11 @@ class IndexController extends ControllerBase
     public function pcloseAction()
     {
         $path = ROOT_PATH;
-        $command = sprintf("php %s/run Test\\\\Test sleep 10 &", $path);
-        pclose(popen($command, 'r'));
-        echo $command;
+        for ($i = 0; $i < 10; $i++) {
+            $command = sprintf("php %s/run Test\\\\Test sleep 10 &", $path);
+            pclose(popen($command, 'r'));
+            dump($command);
+        }
     }
 
     public function routerAction($key1 = "", $key2 = "", $key3 = "")
