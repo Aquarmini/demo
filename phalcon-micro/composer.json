@@ -1,0 +1,27 @@
+{
+    "name": "limingxinleo/phalcon-project-micro",
+    "description": "a micro project for phalcon",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "李铭昕",
+            "email": "715557344@qq.com"
+        }
+    ],
+    "require": {
+        "limingxinleo/limx-package": "^1.0",
+        "limingxinleo/phalcon-utils": "^1.2.4",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "require-dev": {
+        "limingxinleo/limx-package": "^1.0"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "mkdir .phalcon",
+            "php -r \"copy('.env.example', '.env');\"",
+            "php run"
+        ]
+    }
+}
