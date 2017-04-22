@@ -63,6 +63,7 @@
                     分页</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/model/trans') }}">事务测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/model/cache') }}">CacheModel</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/view/longPolling') }}">长轮询</a>
 
             </div>
             <div class="col-md-12">
