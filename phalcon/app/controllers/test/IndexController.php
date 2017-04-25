@@ -2,6 +2,7 @@
 //declare(strict_types = 1);
 namespace App\Controllers\Test;
 
+use App\Utils\Log;
 use limx\tools\LRedis;
 use limx\tools\MyRedis;
 use limx\func\Match;
@@ -432,6 +433,15 @@ class IndexController extends ControllerBase
         logger("This is a Test Log Info");
         logger("This is a Test Log ERROR", 'error');
         logger("This is a Test Log Info In test", 'info', 'test.log');
+
+        Log::log('info', "This is a log by Utils");
+        Log::info("This is a log by Utils");
+        Log::error("This is a log by Utils");
+        Log::alert("This is a log by Utils");
+        Log::warning("This is a log by Utils");
+        Log::debug("This is a log by Utils");
+        Log::notice("This is a log by Utils");
+        Log::emergency("This is a log by Utils");
         func();
     }
 
