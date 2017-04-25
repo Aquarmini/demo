@@ -31,7 +31,6 @@ class SwooleTask extends Task
         echo Color::colorize('  check               检验是否有Swoole扩展', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  processSimple       简单的进程测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  processAdd          子进程计算父进程总结测试', Color::FG_GREEN), PHP_EOL;
-
     }
 
     public function processAddAction()

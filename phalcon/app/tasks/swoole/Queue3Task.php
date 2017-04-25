@@ -12,14 +12,14 @@ namespace App\Tasks\Swoole;
 
 use App\Models\Test\User;
 use App\Tasks\System\QueueTask;
-use limx\tools\LRedis;
+use limx\phalcon\Redis;
 use limx\phalcon\Cli\Color;
 use limx\phalcon\DB;
 
 class Queue3Task extends QueueTask
 {
     // 最大进程数
-    protected $maxProcesses = 10;
+    protected $maxProcesses = 2;
     // 当前进程数
     protected $process = 0;
     // 消息队列Redis键值
@@ -29,16 +29,36 @@ class Queue3Task extends QueueTask
 
     protected function redisClient()
     {
-        $config = [
-            'host' => '127.0.0.1',
-            'auth' => '',
-            'port' => '6379',
-        ];
-        return LRedis::getInstance($config);
+        return Redis::getInstance('127.0.0.1', '910123');
+    }
+
+    protected function redisChildClient()
+    {
+        return Redis::getInstance('127.0.0.1', '910123', 0, 6379, uniqid());
     }
 
     protected function run($data)
     {
+        sleep(1);
+        echo Color::colorize($data, Color::FG_GREEN) . PHP_EOL;
+        $redis = $this->redisChildClient();
+        while (true) {
+            // 无任务时,阻塞等待
+            $data = $redis->brpop($this->queueKey, 3);
+            if (!$data) {
+                break;
+            }
+            if ($data[0] != $this->queueKey) {
+                // 消息队列KEY值不匹配
+                continue;
+            }
+            if (isset($data[1])) {
+                echo Color::colorize($data[1], Color::FG_GREEN) . PHP_EOL;
+            }
+        }
+        return;
+
+
         $user = User::findFirst(1);
 
         if (is_numeric($user->name)) {

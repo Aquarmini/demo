@@ -8,11 +8,12 @@
 // +----------------------------------------------------------------------
 // | Date: 2017/2/4 Time: 上午10:00
 // +----------------------------------------------------------------------
-declare(ticks = 1);
+declare(ticks=1);
+
 namespace App\Tasks\Swoole;
 
 use Phalcon\Cli\Task;
-use limx\tools\LRedis;
+use limx\phalcon\Redis;
 
 class Queue2Task extends Task
 {
@@ -75,7 +76,7 @@ class Queue2Task extends Task
 
     /**
      * [process desc]
-     * @desc 子进程
+     * @desc   子进程
      * @author limx
      * @param \swoole_process $worker
      */
@@ -98,13 +99,7 @@ class Queue2Task extends Task
 
     private function redis_client()
     {
-        $config = [
-            'host' => '127.0.0.1',
-            'auth' => '',
-            'port' => '6379',
-        ];
-        $redis = LRedis::getInstance($config);
-        return $redis;
+        return Redis::getInstance('127.0.0.1', '910123');
     }
 
     private function sig_handler($signo)
