@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Utils\Mongo;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 use MongoDB;
@@ -27,6 +28,8 @@ class MongoDBTask extends Task
         echo Color::colorize('  query          查询记录', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  update         更新记录', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  delete         删除记录', Color::FG_GREEN) . PHP_EOL;
+
+        echo Color::colorize('  utilQuery      工具类查询记录', Color::FG_GREEN) . PHP_EOL;
     }
 
     private function mongoManager()
@@ -44,6 +47,17 @@ class MongoDBTask extends Task
             'db' => $config->mongo->db // 覆盖$server字符串中的database段
         ];
         return new MongoDB\Driver\Manager($uri, $options);
+    }
+
+    public function utilQueryAction()
+    {
+        $filter = ['id' => ['$gt' => 1]];
+        $options = [
+            'projection' => ['_id' => 0],
+            'sort' => ['id' => -1],
+        ];
+        $res = Mongo::query('user', $filter, $options);
+        print_r($res);
     }
 
     public function deleteAction()

@@ -212,17 +212,17 @@ class IndexController extends ControllerBase
         $res[] = (true or $foo);
         $res[] = $num && $num > 11;
         $res[] = null && $num > 11;
-        $res[] = null ?? 11; // php7 新逻辑运算符
+        // $res[] = null ?? 11; // php7 新逻辑运算符
         // php7 新特性制定返回值类型
-        $func = function (int $num): int {
-            return $num++;
-        };
-        $func2 = function (string $foo): string {
-            return $foo . "...";
-        };
-        $res[] = $func($num);
-        $res[] = $func2($num);
-        dump($res);
+        // $func = function (int $num): int {
+        //     return $num++;
+        // };
+        // $func2 = function (string $foo): string {
+        //     return $foo . "...";
+        // };
+        // $res[] = $func($num);
+        // $res[] = $func2($num);
+        // dump($res);
     }
 
     public function pathAction()

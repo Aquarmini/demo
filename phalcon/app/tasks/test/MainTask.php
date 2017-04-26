@@ -37,6 +37,7 @@ class MainTask extends Task
         echo Color::colorize('  Pcre                    正则相关函数测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Phalcon                 Phalcon框架功能测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Php7                    php7函数测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  Queue                   消息队列测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Redis                   Redis测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Rsa                     Rsa加密测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Shell                   php运行shell脚本测试', Color::FG_GREEN), PHP_EOL;
