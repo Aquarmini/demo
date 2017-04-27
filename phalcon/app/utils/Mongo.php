@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Utils;
 
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Driver\Query;
 use MongoDB\Driver\WriteConcern;
 use MongoDB\Driver\BulkWrite;
@@ -180,6 +181,19 @@ class Mongo
         $namespace = sprintf("%s.%s", $db, $table);
 
         return $manager->executeBulkWrite($namespace, $bulk, $writeConcern);
+    }
+
+    /**
+     * @desc   获取mongodb的时间类型
+     * @author limx
+     * @param  int $microtime 毫秒数 microtime(true) * 1000
+     */
+    public static function datetime($microtime = null)
+    {
+        if (!isset($microtime)) {
+            $microtime = microtime(true) * 1000;
+        }
+        return new UTCDateTime($microtime);
     }
 
 
