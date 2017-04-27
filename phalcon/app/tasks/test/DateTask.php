@@ -23,6 +23,21 @@ class DateTask extends Task
 
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  format              format测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  week                第几年的第几周', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function weekAction()
+    {
+        $week = date("W");
+        $msg = sprintf("今天是一年的第%d周", $week);
+        echo Color::colorize($msg, Color::FG_LIGHT_CYAN), PHP_EOL;
+        $time = time();
+        for ($i = 0; $i < 20; $i++) {
+            $time = strtotime("-1 weeks", $time);
+            $week = date("W", $time);
+            $msg = sprintf("上一周是第%d周", $week);
+            echo Color::colorize($msg, Color::FG_LIGHT_CYAN), PHP_EOL;
+        }
     }
 
     public function formatAction()

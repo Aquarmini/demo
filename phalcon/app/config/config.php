@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.7.9',
+        'version' => '1.7.10',
 
         /*
         |--------------------------------------------------------------------------
@@ -238,6 +238,7 @@ return new Config(
                 'system/crypt.php',
                 'system/redis.php',
                 'system/mongo.php',
+
             ],
             'cli' => [
                 'system/cache.php',
