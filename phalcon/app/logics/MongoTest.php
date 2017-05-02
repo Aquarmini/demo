@@ -25,7 +25,7 @@ class MongoTest extends Injectable
 
     public function getProjection()
     {
-        return ['_id' => 0, 'timerd' => 0];
+        return ['_id' => false, 'timerd' => false];
     }
 
 
