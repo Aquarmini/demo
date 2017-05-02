@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Logics\MongoTest;
 use App\Utils\Mongo;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
@@ -35,6 +36,32 @@ class MongoDBTask extends Task
         echo Color::colorize('  utilInsert     工具类插入记录', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  utilUpdate     工具类更新记录', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  utilDelete     工具类删除记录', Color::FG_GREEN) . PHP_EOL;
+
+        echo Color::colorize('  logicInsert         逻辑层插入DB数据并更新Mongo缓存', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  logicUpdate         逻辑层修改DB数据并更新Mongo缓存', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  logicFindFirst      获取DB数据并更新Mongo缓存', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function logicFindFirstAction()
+    {
+        $db = new MongoTest();
+        $res = $db->findFirstWithCache();
+        print_r($res);
+    }
+
+    public function logicUpdateAction()
+    {
+        $db = new MongoTest();
+        $res = $db->updateWithCache();
+        print_r($res);
+    }
+
+    public function logicInsertAction()
+    {
+        $db = new MongoTest();
+        $res = $db->insertWithCache();
+        print_r($res);
     }
 
     private function mongoManager()

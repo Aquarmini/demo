@@ -26,6 +26,11 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function upstreamTestAction()
+    {
+        echo env('CRYPT_KEY');
+    }
+
     public function firephpAction()
     {
         $logger = new Firephp();
