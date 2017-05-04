@@ -2,6 +2,7 @@
 //declare(strict_types = 1);
 namespace App\Controllers\Test;
 
+use App\Utils\Debug;
 use App\Utils\Log;
 use limx\tools\LRedis;
 use limx\tools\MyRedis;
@@ -24,6 +25,11 @@ class IndexController extends ControllerBase
     public function infoAction()
     {
         echo phpinfo();
+    }
+
+    public function locationIpAction()
+    {
+        dump(Debug::ip());
     }
 
     public function upstreamTestAction()
