@@ -105,6 +105,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/checkSign') }}">验签接口</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/sms') }}">短信接口</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/login') }}">支付宝登录</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/ali/alimobile') }}">支付宝jsApi</a>
             </div>
             <div class="col-md-12">
                 <h3>

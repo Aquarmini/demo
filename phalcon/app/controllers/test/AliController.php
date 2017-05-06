@@ -49,7 +49,7 @@ class AliController extends ControllerBase
 
     /**
      * [infoAction desc]
-     * @desc 支付宝内WAP获取用户信息
+     * @desc   支付宝内WAP获取用户信息
      * @author limx
      * @return mixed
      * @throws \Exception
@@ -81,7 +81,7 @@ class AliController extends ControllerBase
         $request = new \AlipaySystemOauthTokenRequest();
         $request->setGrantType("authorization_code");
         $request->setCode($code);
-//        $request->setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
+        //        $request->setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
         $result = $aop->execute($request);
         $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
         $user_id = $result->$responseNode->user_id;
@@ -97,7 +97,7 @@ class AliController extends ControllerBase
 
     /**
      * [userinfoAction desc]
-     * @desc APP 获取用户信息
+     * @desc   APP 获取用户信息
      * @author limx
      * @throws \Exception
      */
@@ -116,7 +116,7 @@ class AliController extends ControllerBase
         $request = new \AlipaySystemOauthTokenRequest();
         $request->setGrantType("authorization_code");
         $request->setCode($code);
-//        $request->setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
+        //        $request->setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
         $result = $aop->execute($request);
         $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
         $user_id = $result->$responseNode->user_id;
@@ -138,7 +138,7 @@ class AliController extends ControllerBase
 
     /**
      * [smsAction desc]
-     * @desc 下载阿里短信官方sdk
+     * @desc   下载阿里短信官方sdk
      * @author limx
      */
     public function smsAction()
@@ -166,7 +166,7 @@ class AliController extends ControllerBase
 
     /**
      * [loginAction desc]
-     * @desc 支付宝登录 签名
+     * @desc   支付宝登录 签名
      * @author limx
      */
     public function loginAction()
@@ -192,6 +192,11 @@ class AliController extends ControllerBase
 
         return success($data);
 
+    }
+
+    public function alimobileAction()
+    {
+        echo 1;
     }
 
 }

@@ -27,6 +27,12 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function macAction()
+    {
+        $p = $this->request->get('q');
+        echo $p;
+    }
+
     public function locationIpAction()
     {
         dump(Debug::ip());
