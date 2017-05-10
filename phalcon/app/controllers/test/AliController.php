@@ -196,7 +196,7 @@ class AliController extends ControllerBase
 
     public function alimobileAction()
     {
-        echo 1;
+        return $this->view->render("test/ali", "alimobile");
     }
 
 }
