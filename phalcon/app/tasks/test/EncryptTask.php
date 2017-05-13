@@ -24,6 +24,29 @@ class EncryptTask extends Task
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  rsa         RSA加密测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  aes         AES加密测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  hex         Hex Str 转化测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function hexAction()
+    {
+        $key = '313233343536373839616263646566';
+
+        echo $this->hexToStr($key);
+        echo $this->strToHex($this->hexToStr($key));
+    }
+
+    private function hexToStr($hex)
+    {
+        $str = "";
+        for ($i = 0; $i < strlen($hex) - 1; $i += 2) {
+            $str .= chr(hexdec($hex[$i] . $hex[$i + 1]));
+        }
+        return $str;
+    }
+
+    private function strToHex($string)
+    {
+        return bin2hex($string);
     }
 
     public function aesAction()

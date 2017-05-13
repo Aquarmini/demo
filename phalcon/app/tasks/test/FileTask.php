@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Utils\Redis;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 
@@ -23,6 +24,27 @@ class FileTask extends Task
 
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  save        文件存储', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  csv         CSV文件解析', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function csvAction()
+    {
+        $file = fopen(ROOT_PATH . '/data/file/device_key.csv', 'r');
+        while ($data = fgetcsv($file)) { //每次读取CSV里面的一行内容
+            //print_r($data); //此为一个数组，要获得每一个数据，访问数组下标即可
+            $goods_list[] = $data;
+        }
+        Redis::select(1);
+
+        foreach ($goods_list as $item) {
+            if ($item[0] != "") {
+                Redis::hset($item[1], 'key1', $item[2]);
+                Redis::hset($item[1], 'key2', $item[3]);
+                echo Color::colorize($item[1]) . PHP_EOL;
+            }
+        }
+
+        fclose($file);
     }
 
     public function saveAction()
