@@ -13,6 +13,8 @@ use limx\phalcon\Cli\Color;
 
 class EncryptTask extends Task
 {
+    static private $iv = '00000000000000000000000000000000';
+
     public function mainAction()
     {
         echo Color::head('Help:'), PHP_EOL;
@@ -25,6 +27,17 @@ class EncryptTask extends Task
         echo Color::colorize('  rsa         RSA加密测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  aes         AES加密测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  hex         Hex Str 转化测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  aesMcrypt   Mcrypt的AeS加密', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function aesMcryptAction()
+    {
+        $data = "41e0442edf5e1071b4a514409fec46cc";
+        $key = "41a10264c72a8fee55bc258ee24bc9c0";
+        echo Color::colorize("密文：" . $data) . PHP_EOL;
+        echo Color::colorize("密钥：" . $key) . PHP_EOL;
+        echo Color::colorize("解密：" . $this->decryptData($data, $key)) . PHP_EOL;
+
     }
 
     public function hexAction()
@@ -33,6 +46,31 @@ class EncryptTask extends Task
 
         echo $this->hexToStr($key);
         echo $this->strToHex($this->hexToStr($key));
+    }
+
+    public function decryptData($content, $key)
+    {
+        $decrypt_data = mcrypt_decrypt(
+            MCRYPT_RIJNDAEL_128,
+            $this->hexToStr($key),
+            $this->hexToStr($content),
+            MCRYPT_MODE_ECB,
+            $this->hexToStr(self::$iv)
+        );
+        return $this->strToHex($decrypt_data);
+    }
+
+
+    public function encryptData($content, $key)
+    {
+        $encrypt_data = mcrypt_encrypt(
+            MCRYPT_RIJNDAEL_128,
+            $this->hexToStr($key),
+            $this->hexToStr($content),
+            MCRYPT_MODE_ECB,
+            $this->hexToStr(self::$iv)
+        );
+        return $this->strToHex($encrypt_data);
     }
 
     private function hexToStr($hex)
