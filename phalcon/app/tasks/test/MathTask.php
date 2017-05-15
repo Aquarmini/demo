@@ -22,10 +22,22 @@ class MathTask extends Task
         echo Color::colorize('  php run Test\\\\Math [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  floor [...$1]      取整测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  fmod  [$1] [$2]    浮点数除法取余测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  max   [...$1]      取最大值', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  floor   [...$1]      取整测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  fmod    [$1] [$2]    浮点数除法取余测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  max     [...$1]      取最大值', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  rand               mt_rand 与 rand取随机数', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  dechex  [...$1]            进制转换', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function dechexAction($params = [])
+    {
+        foreach ($params as $item) {
+            echo Color::colorize("原数字=" . $item, Color::FG_LIGHT_CYAN) . PHP_EOL;
+            $res = dechex($item);
+            echo Color::colorize("16进制数字=" . $res, Color::FG_LIGHT_GREEN) . PHP_EOL;
+            echo PHP_EOL;
+        }
     }
 
     public function randAction()
