@@ -24,6 +24,14 @@ class StrTask extends Task
 
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  random      {$1}        随机字符串', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  strPad                  不足位数补0', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function strPadAction()
+    {
+        $num = rand(1, 9999);
+        echo Color::colorize("数字：" . $num, Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize("结果：" . str_pad($num, 5, '0', STR_PAD_LEFT));
     }
 
     public function randomAction($params)
