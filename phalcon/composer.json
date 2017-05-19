@@ -3,10 +3,12 @@
     "description": "a phalcon porject for simple-subcontrollers",
     "type": "project",
     "license": "Apache-2.0",
-    "authors": [{
-        "name": "李铭昕",
-        "email": "715557344@qq.com"
-    }],
+    "authors": [
+        {
+            "name": "李铭昕",
+            "email": "715557344@qq.com"
+        }
+    ],
     "require": {
         "php": ">=5.5",
         "ext-phalcon": "^3.0",
@@ -21,7 +23,8 @@
         "endroid/qrcode": "^1.7",
         "limingxinleo/limx-pdo": "^1.2",
         "limingxinleo/easemob": "^1.0",
-        "paypal/rest-api-sdk-php": "^1.11"
+        "paypal/rest-api-sdk-php": "^1.11",
+        "limingxinleo/utils-redis": "^0.0.1"
     },
     "scripts": {
         "post-create-project-cmd": [

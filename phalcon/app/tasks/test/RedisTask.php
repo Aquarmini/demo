@@ -33,6 +33,19 @@ class RedisTask extends Task
         echo Color::colorize('  hget            hget测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  multi           事务测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  static          静态方法', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  utilsRedis      测试limningxinleo/utils-redis', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function utilsRedisAction()
+    {
+        $config = di('config');
+        $redis = \limx\utils\Redis::getInstance(
+            $config->redis->host,
+            $config->redis->auth,
+            $config->redis->index,
+            $config->redis->port
+        );
+        print_r($redis->keys("*"));
     }
 
     public function staticAction()
