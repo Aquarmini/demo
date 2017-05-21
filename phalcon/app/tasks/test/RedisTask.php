@@ -14,6 +14,7 @@ use App\Utils\Redis as RedisUtil;
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
 use limx\phalcon\Cli\Color;
+use Predis\Client;
 
 class RedisTask extends Task
 {
@@ -34,6 +35,30 @@ class RedisTask extends Task
         echo Color::colorize('  multi           事务测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  static          静态方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  utilsRedis      测试limningxinleo/utils-redis', Color::FG_GREEN), PHP_EOL;
+
+        echo Color::colorize('  predisKeys      predis扩展的keys方法', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  luaGet          lua脚本get方法', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function luaGetAction()
+    {
+        $client = $this->predisClient();
+        $script = <<<LUA
+    local values = {}; 
+    for i,v in ipairs(KEYS) do 
+        values[#values+1] = redis.pcall('get',v); 
+    end 
+    return {KEYS,values};
+LUA;
+        $res = $client->eval($script, 2, 'phalcon:test:key', 'phalcon:test:index');
+        print_r($res);
+    }
+
+    public function predisKeysAction()
+    {
+        $client = $this->predisClient();
+        $res = $client->keys("*");
+        print_r($res);
     }
 
     public function utilsRedisAction()
@@ -142,5 +167,18 @@ class RedisTask extends Task
             'port' => $config->redis->port,
         ]);
         return $redis;
+    }
+
+    private function predisClient()
+    {
+        $config = di('config');
+
+        $client = new Client([
+            'host' => $config->redis->host,
+            'password' => $config->redis->auth,
+            'port' => $config->redis->port,
+        ]);
+
+        return $client;
     }
 }
