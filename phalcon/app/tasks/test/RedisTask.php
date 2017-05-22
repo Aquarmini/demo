@@ -38,6 +38,53 @@ class RedisTask extends Task
 
         echo Color::colorize('  predisKeys      predis扩展的keys方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  luaGet          lua脚本get方法', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  lua             lua脚本操作方法', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function luaAction()
+    {
+        $client = $this->predisClient();
+        $script = <<<LUA
+    local values = {}; 
+    for i,v in ipairs(KEYS) do 
+        values[#values+1] = v; 
+    end 
+    return #values;
+LUA;
+        $res = $client->eval($script, 2, "val1", "val2");
+        echo Color::colorize("返回两个传入数据的数量：" . $res) . PHP_EOL;
+
+        $script = <<<LUA
+    local values = {}; 
+    for i,v in ipairs(KEYS) do 
+        values[#values+1] = v; 
+    end 
+    return values;
+LUA;
+        $res = $client->eval($script, 2, "val1", "val2");
+        echo Color::colorize("返回两个传入数据：" . json_encode($res)) . PHP_EOL;
+
+        $script = <<<LUA
+    local values = {};
+    local keys = redis.pcall('keys','*')
+    for i,v in ipairs(keys) do 
+        values[#values+1] = v; 
+    end 
+    return values;
+LUA;
+        $res = $client->eval($script, 0);
+        echo Color::colorize("返回keys *：" . json_encode($res)) . PHP_EOL;
+
+        $script = <<<LUA
+    local values = {};
+    for i=1,10 do 
+        values[#values+1] = redis.pcall('incr',KEYS[1]); 
+    end 
+    return values;
+LUA;
+        $res = $client->eval($script, 1, 'phalcon:test:index');
+        echo Color::colorize("Incr phalcon:test:index * 10：" . json_encode($res)) . PHP_EOL;
+
     }
 
     public function luaGetAction()

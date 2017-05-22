@@ -12,7 +12,7 @@ use limx\phalcon\Cli\Color;
 use App\Utils\DB;
 use limx\phalcon\Utils\Str;
 
-class Test extends \Phalcon\Di\Injectable
+class Test extends Base
 {
     public function index()
     {
@@ -39,5 +39,10 @@ class Test extends \Phalcon\Di\Injectable
         // $res = DB::execute($sql, [1, 18, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), date('Y-m-d H:i:s')], true);
 
         return $res;
+    }
+
+    public static function getTime($seed = 0)
+    {
+        return time() . $seed;
     }
 }
