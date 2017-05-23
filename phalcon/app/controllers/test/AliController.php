@@ -199,5 +199,118 @@ class AliController extends ControllerBase
         return $this->view->render("test/ali", "alimobile");
     }
 
+    // *********************** 开放搜索 **************************
+
+    private function openSearchClient()
+    {
+        library('OpenSearch/Autoloader/Autoloader.php');
+
+        //替换为对应的access key id
+        $accessKeyId = env('ALIYUN_ACCESS_KEY');
+        //替换为对应的access secret
+        $secret = env('ALIYUN_ACCESS_SECRET');
+        //替换为对应区域api访问地址，可参考应用控制台,基本信息中api地址
+        $endPoint = env("ALIYUN_OPENSEARCH_API");
+        //替换为下拉提示名称
+        $suggestName = '什么鬼';
+        //开启调试模式
+        $options = ['debug' => true];
+        //创建OpenSearchClient客户端对象
+        $client = new \OpenSearch\Client\OpenSearchClient($accessKeyId, $secret, $endPoint, $options);
+        return $client;
+    }
+
+    public function openSearchUpdateAction()
+    {
+        //替换为应用名
+        $appName = 'test_lbs';
+
+        $client = $this->openSearchClient();
+        //设置数据需推送到对应应用表中
+        $tableName = 'test';
+        //创建文档操作client
+        $documentClient = new \OpenSearch\Client\DocumentClient($client);
+        //添加数据
+        $docs_to_upload = array();
+        for ($i = 0; $i < 10; $i++) {
+            $item = array();
+            $item['cmd'] = 'ADD';
+            $item["fields"] = array(
+                "id" => $i + 1,
+                "name" => "搜索" . $i,
+                "longitude" => 121 + floatval(rand(0, 10000)) / 10000,
+                "latitude" => 31 + floatval(rand(0, 10000)) / 10000,
+            );
+            $docs_to_upload[] = $item;
+        }
+        //将文档编码成json格式
+        $json = json_encode($docs_to_upload);
+        //提交推送文档
+        $ret = $documentClient->push($json, $appName, $tableName);
+        dump($ret);
+    }
+
+    public function openSearchNameAction()
+    {
+        $client = $this->openSearchClient();
+        $appName = 'test_lbs';
+
+        // 实例化一个搜索类
+        $searchClient = new \OpenSearch\Client\SearchClient($client);
+        // 实例化一个搜索参数类
+        $params = new \OpenSearch\Util\SearchParamsBuilder();
+        //设置config子句的start值
+        $params->setStart(0);
+        //设置config子句的hit值
+        $params->setHits(20);
+        // 指定一个应用用于搜索
+        $params->setAppName($appName);
+        // 指定搜索关键词
+        $params->setQuery("name:'搜索'");
+        // 指定返回的搜索结果的格式为json
+        $params->setFormat("fulljson");
+        //添加排序字段
+        $params->addSort('RANK', \OpenSearch\Util\SearchParamsBuilder::SORT_DECREASE);
+        // 执行搜索，获取搜索结果
+        $ret = $searchClient->execute($params->build())->result;
+        dump(json_decode($ret, true));
+    }
+
+    public function openSearchNearAction()
+    {
+        $client = $this->openSearchClient();
+        $appName = 'test_lbs';
+        $longitude = 121.0;
+        $latitude = 31.0;
+
+        // 实例化一个搜索类
+        $searchClient = new \OpenSearch\Client\SearchClient($client);
+        // 实例化一个搜索参数类
+        $params = new \OpenSearch\Util\SearchParamsBuilder();
+        //设置config子句的start值
+        $params->setStart(0);
+        //设置config子句的hit值
+        $params->setHits(20);
+        // 指定一个应用用于搜索
+        $params->setAppName($appName);
+        // 指定搜索关键词
+        $params->setQuery("name:'搜索'");
+        $distance = sprintf('distance(longitude,latitude,"%s","%s")<100', $longitude, $latitude);
+        $params->setFilter($distance);
+        // 精排表达式
+        $kvpairs = sprintf("longitude_input:%s,latitude_input:%s", $longitude, $latitude);
+        $params->setKvPairs($kvpairs);
+        // 指定返回的搜索结果的格式为json
+        $params->setFormat("fulljson");
+        //添加排序字段
+        // $params->addSort($distance, \OpenSearch\Util\SearchParamsBuilder::SORT_INCREASE);
+        // 执行搜索，获取搜索结果
+        $ret = $searchClient->execute($params->build());
+        dump($distance);
+        dump($kvpairs);
+        dump($ret);
+        dump(json_decode($ret->result, true));
+    }
+
 }
 

@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.8.1',
+        'version' => '1.8.2',
 
         /*
         |--------------------------------------------------------------------------
@@ -133,7 +133,7 @@ return new Config(
             'listenersDir' => APP_PATH . '/listeners/',
             'logicsDir' => APP_PATH . '/logics/',
             'modelsDir' => APP_PATH . '/models/',
-            'servicesDir' => APP_PATH . '/services/',
+            'servicesDir' => APP_PATH . '/config/services/',
             'tasksDir' => APP_PATH . '/tasks/',
             'traitsDir' => APP_PATH . '/traits/',
             'utilsDir' => APP_PATH . '/utils/',
@@ -231,21 +231,20 @@ return new Config(
         */
         'services' => [
             'mvc' => [
-                'system/session.php',
-                'system/cache.php',
-                'system/error.php',
-                'system/cookies.php',
-                'system/crypt.php',
-                'system/redis.php',
-                'system/mongo.php',
-
+                'session.php',
+                'cache.php',
+                'error.php',
+                'cookies.php',
+                'crypt.php',
+                'redis.php',
+                'mongo.php',
             ],
             'cli' => [
-                'system/cache.php',
-                'system/error.php',
-                'system/crypt.php',
-                'system/redis.php',
-                'system/mongo.php',
+                'cache.php',
+                'error.php',
+                'crypt.php',
+                'redis.php',
+                'mongo.php',
             ],
         ],
 
