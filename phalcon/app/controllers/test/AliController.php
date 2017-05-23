@@ -199,7 +199,7 @@ class AliController extends ControllerBase
         return $this->view->render("test/ali", "alimobile");
     }
 
-    // *********************** 开放搜索 **************************
+    // *********************** 开放搜索 v3.0 **************************
 
     private function openSearchClient()
     {
@@ -236,7 +236,7 @@ class AliController extends ControllerBase
             $item = array();
             $item['cmd'] = 'ADD';
             $item["fields"] = array(
-                "id" => $i + 1,
+                "id" => rand(1, 1000),
                 "name" => "搜索" . $i,
                 "longitude" => 121 + floatval(rand(0, 10000)) / 10000,
                 "latitude" => 31 + floatval(rand(0, 10000)) / 10000,
@@ -312,5 +312,44 @@ class AliController extends ControllerBase
         dump(json_decode($ret->result, true));
     }
 
+    // *********************** 开放搜索 v2 **************************
+    private function openSearchV2Client()
+    {
+        //替换为对应的access key id
+        $accessKeyId = env('ALIYUN_ACCESS_KEY');
+        //替换为对应的access secret
+        $secret = env('ALIYUN_ACCESS_SECRET');
+        //替换为对应区域api访问地址，可参考应用控制台,基本信息中api地址
+        $host = env("ALIYUN_OPENSEARCH_API");
+
+        $key_type = "aliyun";  //固定值，不必修改
+        $opts = array('host' => $host);
+        $client = new \App\Logics\OpenSearch\CloudsearchClient($accessKeyId, $secret, $opts, $key_type);
+        return $client;
+    }
+
+    public function openSearchV2NearAction()
+    {
+        $client = $this->openSearchV2Client();
+        $index_name = 'test_lbs';
+        $longitude = 121.0;
+        $latitude = 31.0;
+        $query = "name:'搜索'";
+        $fileter = sprintf('distance(longitude,latitude,"%s","%s")<100', $longitude, $latitude);
+        $kvpairs = sprintf("longitude_input:%s,latitude_input:%s", $longitude, $latitude);
+
+        $search = new \App\Logics\OpenSearch\CloudsearchSearch($client);
+        $search->addIndex($index_name);
+        $search->setQueryString($query);
+        $search->addFilter($fileter);
+        $search->setFormat('fulljson');
+        $search->setFormulaName('distance2');
+        $search->setPair($kvpairs);
+        $search->setStartHit(0);
+        $search->setHits(20);
+        $ret = json_decode($search->search(), true);
+        dump($ret);
+        dump($ret['result']);
+    }
 }
 
