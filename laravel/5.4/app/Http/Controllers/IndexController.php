@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Timer;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,5 +27,12 @@ class IndexController extends Controller
         foreach ($res as $user) {
             dump($user->name);
         }
+    }
+
+    public function timer()
+    {
+        // $job = (new Timer(time()))->delay(Carbon::now()->addSeconds(10));
+        $job = new Timer(time());
+        dispatch($job);
     }
 }

@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/index/hello', "IndexController@hello");
 Route::get('/index/sql', "IndexController@sql");
+Route::get('/index/timer', "IndexController@timer");
