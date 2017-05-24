@@ -9,6 +9,7 @@
 
 namespace App\Tasks\Test;
 
+use App\Utils\Log;
 use limx\phalcon\Redis;
 use limx\phalcon\Cli\Color;
 
@@ -67,6 +68,9 @@ class QueueTask extends \App\Tasks\System\QueueTask
     protected function handle($data)
     {
         echo Color::success($data);
-
+        Log::info($data);
+        swoole_timer_after(1000, function () use ($data) {
+            Log::info("after" . $data);
+        });
     }
 }

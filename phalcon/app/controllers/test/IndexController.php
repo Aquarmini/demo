@@ -4,6 +4,7 @@ namespace App\Controllers\Test;
 
 use App\Utils\Debug;
 use App\Utils\Log;
+use App\Utils\Redis;
 use limx\tools\LRedis;
 use limx\tools\MyRedis;
 use limx\func\Match;
@@ -93,14 +94,8 @@ class IndexController extends ControllerBase
 
     public function addQueueAction()
     {
-        $config = [
-            'host' => '127.0.0.1',
-            'auth' => '',
-            'port' => '6379',
-        ];
-        $redis = LRedis::getInstance($config);
         $time = time();
-        $redis->lpush('phalcon:test:queue', $time);
+        Redis::lpush('phalcon:test:queue', $time);
         echo "LPUSH phalcon:test:queue ", $time;
     }
 

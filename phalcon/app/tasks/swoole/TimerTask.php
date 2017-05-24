@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Swoole;
 
+use App\Utils\Log;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 
@@ -24,6 +25,7 @@ class TimerTask extends Task
         swoole_timer_after(10000, function () use ($id) {
             swoole_timer_clear($id);
             echo Color::colorize("Clear The Timer Id = " . $id, Color::FG_LIGHT_RED) . PHP_EOL;
+            Log::info("Clear The Timer Id = " . $id);
         });
     }
 }
