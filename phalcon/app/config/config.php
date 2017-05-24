@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.8.2',
+        'version' => '1.8.3',
 
         /*
         |--------------------------------------------------------------------------
@@ -167,6 +167,21 @@ return new Config(
         'log' => [
             'db' => env('LOG_DB', true),
             'error' => env('LOG_ERROR', true),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Model Meta Environment
+        |--------------------------------------------------------------------------
+        |
+        |
+        |
+        */
+        'modelMeta' => [
+            'driver' => env('MODELMETA_DRIVER', 'file'),
+            'statsKey' => '_PHCM_MM',
+            'lifetime' => 172800,
+            'index' => env('REDIS_INDEX', 0),
         ],
 
         /*
