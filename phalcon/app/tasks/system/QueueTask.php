@@ -6,7 +6,8 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-declare(ticks = 1);
+declare(ticks=1);
+
 namespace App\Tasks\System;
 
 use Phalcon\Cli\Task;
@@ -19,8 +20,10 @@ abstract class QueueTask extends Task
     protected $maxProcesses = 500;
     // 当前进程数
     protected $process = 0;
-    // 消息队列Redis键值
+    // 消息队列Redis键值 list lpush添加队列
     protected $queueKey = '';
+    // 延时消息队列的Redis键值 zset
+    protected $delayKey = '';
     // 子进程数到达最大值时的等待时间
     protected $waittime = 1;
 
@@ -40,6 +43,16 @@ abstract class QueueTask extends Task
         // 实例化Redis实例
         $redis = $this->redisClient();
         while (true) {
+            // 监听延时队列
+            if (!empty($this->delayKey)) {
+                $delay_data = $redis->zrangebyscore($this->delayKey, 0, time());
+                foreach ($delay_data as $data) {
+                    // 把可以执行的消息压入队列中
+                    $redis->lpush($this->queueKey, $data);
+                    $redis->zrem($this->delayKey, $data);
+                }
+            }
+            // 监听消息队列
             if ($this->process < $this->maxProcesses) {
                 // 无任务时,阻塞等待
                 $data = $redis->brpop($this->queueKey, 3);
@@ -105,11 +118,44 @@ abstract class QueueTask extends Task
     abstract protected function redisClient();
 
     /**
-     * @desc   消息队列执行的业务代码
+     * @desc   子进程redis实例
      * @author limx
      * @return mixed
      */
-    abstract protected function run($recv);
+    abstract protected function redisChildClient();
+
+    /**
+     * @desc   消息队列 业务逻辑处理
+     * @author limx
+     * @param $recv
+     * @return mixed
+     */
+    abstract protected function handle($recv);
+
+    /**
+     * @desc   消息队列子进程逻辑
+     * @author limx
+     * @return mixed
+     */
+    protected function run($recv)
+    {
+        $this->handle($recv);
+        $redis = $this->redisChildClient();
+        while (true) {
+            // 无任务时,阻塞等待
+            $data = $redis->brpop($this->queueKey, 3);
+            if (!$data) {
+                break;
+            }
+            if ($data[0] != $this->queueKey) {
+                // 消息队列KEY值不匹配
+                continue;
+            }
+            if (isset($data[1])) {
+                $this->handle($data[1]);
+            }
+        }
+    }
 
     /**
      * @desc   信号处理方法 回收已经dead的子进程

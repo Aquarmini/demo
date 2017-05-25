@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.8.3',
+        'version' => '1.8.4',
 
         /*
         |--------------------------------------------------------------------------
@@ -161,7 +161,7 @@ return new Config(
         | Log Environment
         |--------------------------------------------------------------------------
         |
-        | If sql is set to true, then we write a log at the end of each sql.
+        | If db is set to true, then we write a log at the end of each sql.
         |
         */
         'log' => [
@@ -174,7 +174,7 @@ return new Config(
         | Model Meta Environment
         |--------------------------------------------------------------------------
         |
-        |
+        | The modelMetaData support file and redis.
         |
         */
         'modelMeta' => [

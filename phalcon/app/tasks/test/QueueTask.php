@@ -21,6 +21,8 @@ class QueueTask extends \App\Tasks\System\QueueTask
     protected $process = 0;
     // 消息队列Redis键值
     protected $queueKey = 'phalcon:test:queue';
+    // 延时消息队列的Redis键值 zset
+    protected $delayKey = 'phalcon:test:queue:delay';
     // 等待时间
     protected $waittime = 1;
 
@@ -35,32 +37,6 @@ class QueueTask extends \App\Tasks\System\QueueTask
     }
 
     /**
-     * @desc   子进程也能监听消息队列
-     *         3秒内没有消息自动回收
-     * @author limx
-     * @param $data
-     */
-    protected function run($data)
-    {
-        $this->handle($data);
-        $redis = $this->redisChildClient();
-        while (true) {
-            // 无任务时,阻塞等待
-            $data = $redis->brpop($this->queueKey, 3);
-            if (!$data) {
-                break;
-            }
-            if ($data[0] != $this->queueKey) {
-                // 消息队列KEY值不匹配
-                continue;
-            }
-            if (isset($data[1])) {
-                $this->handle($data[1]);
-            }
-        }
-    }
-
-    /**
      * @desc   消息队列处理逻辑
      * @author limx
      * @param $data
@@ -69,8 +45,27 @@ class QueueTask extends \App\Tasks\System\QueueTask
     {
         echo Color::success($data);
         Log::info($data);
-        swoole_timer_after(1000, function () use ($data) {
-            Log::info("after" . $data);
-        });
     }
+
+    public function testAction()
+    {
+        $redis = $this->redisChildClient();
+        for ($i = 0; $i < 5000; $i++) {
+            $data = [
+                'id' => $i,
+                'timestamp' => time(),
+                'data' => 'queue',
+            ];
+            $redis->lpush($this->queueKey, json_encode($data));
+        }
+        for ($i = 0; $i < 10; $i++) {
+            $data = [
+                'id' => $i,
+                'timestamp' => time(),
+                'data' => 'delay queue',
+            ];
+            $redis->zadd($this->delayKey, time() + 10, json_encode($data));
+        }
+    }
+
 }
