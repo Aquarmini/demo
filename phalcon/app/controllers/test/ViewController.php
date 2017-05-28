@@ -44,5 +44,17 @@ class ViewController extends Controller
         }
     }
 
+    public function postAction()
+    {
+        return $this->view->render("test/view", 'post');
+    }
+
+    public function pfnPostDataAction()
+    {
+        $data = $this->request->get();
+        $name = $data['data']['name'];
+        return self::success(['request' => $data, 'name' => $name]);
+    }
+
 }
 

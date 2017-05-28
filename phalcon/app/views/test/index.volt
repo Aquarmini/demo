@@ -46,6 +46,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/pclose') }}">无阻塞调用脚本</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/upstreamTest') }}">负载均衡测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/locationIp') }}">所在的IP</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/view/post') }}">Post测试</a>
             </div>
             <div class="col-md-12">
                 <h3>

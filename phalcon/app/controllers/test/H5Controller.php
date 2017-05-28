@@ -9,7 +9,7 @@ class H5Controller extends ControllerBase
 
     public function indexAction()
     {
-
+        dump($_SERVER);
     }
 
     public function particlesAction()
