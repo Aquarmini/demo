@@ -7,6 +7,15 @@ use limx\phalcon\Cli\Color;
 
 class LaravelTask extends \Phalcon\Cli\Task
 {
+    protected $testArr = [
+        ['id' => 1, 'name' => 'name1'],
+        ['id' => 2, 'name' => 'name2'],
+        ['id' => 3, 'name' => 'name3'],
+        ['id' => 4, 'name' => 'name4'],
+        ['id' => 5, 'name' => 'name5'],
+        ['id' => 6, 'name' => 'name6'],
+        ['id' => 7, 'name' => 'name7'],
+    ];
 
     public function mainAction()
     {
@@ -18,22 +27,28 @@ class LaravelTask extends \Phalcon\Cli\Task
 
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  collect        集合测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  remove         集合移除测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function removeAction()
+    {
+        echo Color::colorize("数据源：") . PHP_EOL;
+        echo Color::colorize("  " . json_encode($this->testArr)) . PHP_EOL;
+        $collection = new Collection($this->testArr);
+        $result = $collection->map(function ($item) {
+            $item['uniqid'] = uniqid();
+            return $item;
+        })->filter(function ($item, $key) {
+            return $item['id'] > 5;
+        });
+        echo Color::colorize("结果：" . json_encode($result), Color::FG_LIGHT_CYAN) . PHP_EOL;
     }
 
     public function collectAction()
     {
-        $arr = [
-            ['id' => 1, 'name' => 'name1'],
-            ['id' => 2, 'name' => 'name2'],
-            ['id' => 3, 'name' => 'name3'],
-            ['id' => 4, 'name' => 'name4'],
-            ['id' => 5, 'name' => 'name5'],
-            ['id' => 6, 'name' => 'name6'],
-            ['id' => 7, 'name' => 'name7'],
-        ];
         echo Color::colorize("数据源：") . PHP_EOL;
-        echo Color::colorize("  " . json_encode($arr)) . PHP_EOL;
-        $collection = new Collection($arr);
+        echo Color::colorize("  " . json_encode($this->testArr)) . PHP_EOL;
+        $collection = new Collection($this->testArr);
         $collection->map(function ($item) {
             echo Color::colorize("map取出每一项：" . json_encode($item), Color::FG_GREEN) . PHP_EOL;
         });
