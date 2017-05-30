@@ -29,6 +29,18 @@ class LaravelTask extends \Phalcon\Cli\Task
         echo Color::colorize('  collect        集合测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  remove         集合移除测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  chunk          集合分组测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  contains       集合是否存在测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function containsAction()
+    {
+        echo Color::colorize("数据源：") . PHP_EOL;
+        echo Color::colorize("  " . json_encode($this->testArr)) . PHP_EOL;
+        $collection = new Collection($this->testArr);
+        $result = $collection->contains(function ($item, $key) {
+            return $item['id'] == 7;
+        });
+        echo Color::colorize("结果：" . json_encode($result), Color::FG_LIGHT_CYAN) . PHP_EOL;
     }
 
     public function chunkAction()
