@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Utils\Log;
 use App\Utils\Redis;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
@@ -25,6 +26,13 @@ class FileTask extends Task
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  save        文件存储', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  csv         CSV文件解析', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  log         日志存储', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function logAction()
+    {
+        Log::info("测试信息");
+        echo Color::success("日志写入成功");
     }
 
     public function csvAction()
