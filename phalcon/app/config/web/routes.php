@@ -64,4 +64,7 @@ $test->setPrefix('/route');
 $test->add('/index/group', 'App\\Controllers\\Route\\Index::group');
 $router->mount($test);
 
+// 路由命名测试
+$router->add('/route/index/name', 'App\\Controllers\\Route\\Index::name');
+$router->add('/route/index/target', 'App\\Controllers\\Route\\Index::target')->setName('route.index.target');
 return $router;
