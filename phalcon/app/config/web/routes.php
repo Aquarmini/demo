@@ -55,4 +55,6 @@ $router->add('/myrouter/:int/:controller', [
     'version' => 1,
 ]);
 
+$router->add('/route/index/index', 'App\\Controllers\\Route\\Index::index');
+
 return $router;
