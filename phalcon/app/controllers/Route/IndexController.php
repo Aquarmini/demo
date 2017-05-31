@@ -12,5 +12,10 @@ class IndexController extends Controller
         echo "显示路由测试";
     }
 
+    public function groupAction()
+    {
+        echo "路由分组测试";
+    }
+
 }
 

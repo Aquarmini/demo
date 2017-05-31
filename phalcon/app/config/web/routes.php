@@ -55,6 +55,13 @@ $router->add('/myrouter/:int/:controller', [
     'version' => 1,
 ]);
 
+// 显性路由测试
 $router->add('/route/index/index', 'App\\Controllers\\Route\\Index::index');
+
+// 路由分组测试
+$test = new \Phalcon\Mvc\Router\Group();
+$test->setPrefix('/route');
+$test->add('/index/group', 'App\\Controllers\\Route\\Index::group');
+$router->mount($test);
 
 return $router;
