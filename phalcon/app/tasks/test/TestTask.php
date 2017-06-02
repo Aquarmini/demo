@@ -8,8 +8,11 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Logics\TestPimple\ConfigServiceProvider;
+use App\Logics\TestPimple\TestServiceProvider;
 use limx\phalcon\Cli\Color;
 use Phalcon\Cli\Task;
+use Pimple\Container;
 
 class TestTask extends Task
 {
@@ -25,6 +28,17 @@ class TestTask extends Task
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  sleep       延时脚本', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  switch      switch测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  pimple      pimple测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function pimpleAction()
+    {
+        $pimple = new Container();
+        $pimple->register(new ConfigServiceProvider());
+        $pimple->register(new TestServiceProvider());
+        print_r($pimple['test']);
+        sleep(1);
+        print_r($pimple['test']);
     }
 
     public function switchAction($params = [])
