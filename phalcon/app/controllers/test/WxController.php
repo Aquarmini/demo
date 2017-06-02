@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Test;
 
+use EasyWeChat\Foundation\Application;
 use limx\tools\wx\OAuth;
 /** 微信支付 S */
 use limx\tools\wx\pay\JsApiPay;
@@ -137,6 +138,24 @@ class WxController extends \Phalcon\Mvc\Controller
          */
         $this->view->jsApiParameters = $jsApiParameters;
         return $this->view->render('test/wx', 'pay');
+    }
+
+    public function wechatAction()
+    {
+        $config = app('easywechat');
+        dump($config);
+        $app = new Application($config);
+        $response = $app->oauth->scopes(['snsapi_userinfo'])->redirect();
+        dump($response);
+        $response->send();
+    }
+
+    public function wechatCallbackAction()
+    {
+        $config = app('easywechat');
+        $app = new Application($config);
+        $user = $app->oauth->user();
+        dump($user);
     }
 
     private function httpGet($url, $params)

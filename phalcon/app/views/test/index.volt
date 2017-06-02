@@ -96,6 +96,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/wx/info') }}">获取微信信息</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/wx/index') }}">WAP跳转到微信</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/wx/pay') }}">微信JsAPiPay</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/wx/wechat') }}">overtrue/wechat扩展测试</a>
             </div>
             <div class="col-md-12">
                 <h3>
