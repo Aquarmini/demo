@@ -26,7 +26,33 @@ class FileTask extends Task
         echo Color::head('Actions:'), PHP_EOL;
         echo Color::colorize('  save        文件存储', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  csv         CSV文件解析', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  csvVol      CSV文件电压解析', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  log         日志存储', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function csvVolAction()
+    {
+        $file = fopen(ROOT_PATH . '/data/file/SPB150.csv', 'r');
+        $prevItem = [];
+        $result = [];
+
+        while ($data = fgetcsv($file)) { //每次读取CSV里面的一行内容
+            if (isset($prevItem[4]) && $data[4] < intval($prevItem[4])) {
+                $result[] = ['vol' => $prevItem[1], 'per' => intval($prevItem[4])];
+            }
+            $prevItem = $data;
+        }
+
+        $target = ROOT_PATH . '/data/file/SPB150.php';
+        file_put_contents($target, "<?php \nreturn [\n");
+        foreach ($result as $item) {
+            $str = sprintf("    ['vol' => %s, 'per' => %s],\n", $item['vol'], $item['per']);
+            file_put_contents($target, $str, FILE_APPEND);
+        }
+        file_put_contents($target, "];", FILE_APPEND);
+        fclose($file);
+
+        echo Color::success("生成文件成功！");
     }
 
     public function logAction()
