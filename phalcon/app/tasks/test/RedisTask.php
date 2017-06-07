@@ -59,6 +59,11 @@ class RedisTask extends Task
         echo Color::colorize($res) . PHP_EOL;
         $res = RedisUtil::incrBy(static::TEST_KEY, 10, 10);
         echo Color::colorize($res) . PHP_EOL;
+
+        // $res = RedisUtil::incr(static::TEST_KEY);
+        // echo Color::colorize($res) . PHP_EOL;
+        // $res = RedisUtil::incrBy(static::TEST_KEY, 10);
+        // echo Color::colorize($res) . PHP_EOL;
     }
 
     public function luasha1Action($params = [])
