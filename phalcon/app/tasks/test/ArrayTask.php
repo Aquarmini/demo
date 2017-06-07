@@ -38,7 +38,7 @@ class ArrayTask extends Task
         echo Color::colorize('  splice  [:off] [:len]   根据指定长度切割', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  multisort               数组排序', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  intersectKey            返回两个数组KEY的差集 若KEY相等返回数组1对应的数据', Color::FG_GREEN), PHP_EOL;
-        echo Color::colorize('  flip                    返回两个数组的差集[检测KEY是否相等]', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  flip                    KEY和VALUE互换', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  fillKeys                填充数据', Color::FG_GREEN), PHP_EOL;
 
     }

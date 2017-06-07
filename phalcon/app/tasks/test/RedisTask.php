@@ -55,9 +55,9 @@ class RedisTask extends Task
 
     public function withtimeAction()
     {
-        $res = RedisUtil::incrWithExpiretime(static::TEST_KEY, 10);
+        $res = RedisUtil::incr(static::TEST_KEY, 10);
         echo Color::colorize($res) . PHP_EOL;
-        $res = RedisUtil::incrByWithExpiretime(static::TEST_KEY, 10, 10);
+        $res = RedisUtil::incrBy(static::TEST_KEY, 10, 10);
         echo Color::colorize($res) . PHP_EOL;
     }
 
