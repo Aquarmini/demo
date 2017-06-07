@@ -181,6 +181,26 @@ LUA;
             $config->redis->port
         );
         print_r($redis->keys("*"));
+        print_r($redis);
+
+        $redis = \limx\utils\Redis::getInstance(
+            $config->redis->host,
+            $config->redis->auth,
+            $config->redis->index,
+            $config->redis->port
+        );
+        print_r($redis);
+
+        $redis = \limx\utils\Redis::getInstance(
+            $config->redis->host,
+            $config->redis->auth,
+            $config->redis->index,
+            $config->redis->port,
+            uniqid()
+        );
+        print_r($redis);
+
+        print_r($redis instanceof \limx\utils\Redis);
     }
 
     public function staticAction()
