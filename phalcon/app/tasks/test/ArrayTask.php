@@ -29,7 +29,7 @@ class ArrayTask extends Task
         echo Color::colorize('  diff                    计算数组差集', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  fill                    用给定的值填充数组', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  filter                  用回调函数过滤数组中的单元', Color::FG_GREEN), PHP_EOL;
-        echo Color::colorize('  intersect               返回arr1中包含arr2中值的数组', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  intersect               返回两个数组值的差集，如果值相等返回数组1对应的数据', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  keys                    返回数组的key值', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  map                     返回callback处理之后的数组', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  unique                  数组去重', Color::FG_GREEN), PHP_EOL;
@@ -37,6 +37,42 @@ class ArrayTask extends Task
         echo Color::colorize('  pad     [:len] [:val]   根据指定长度填充数组', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  splice  [:off] [:len]   根据指定长度切割', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  multisort               数组排序', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  intersectKey            返回两个数组KEY的差集 若KEY相等返回数组1对应的数据', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  flip                    返回两个数组的差集[检测KEY是否相等]', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  fillKeys                填充数据', Color::FG_GREEN), PHP_EOL;
+
+    }
+
+    public function fillKeysAction()
+    {
+        $arr = ['id', 'name', 'username'];
+        echo Color::head("原数组："), PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN), PHP_EOL;
+        echo Color::head("结果："), PHP_EOL;
+        echo Color::colorize(json_encode(array_fill_keys($arr, '')), Color::FG_LIGHT_GREEN), PHP_EOL;
+
+    }
+
+    public function flipAction()
+    {
+        $arr = ['id', 'name', 'username'];
+        echo Color::head("原数组："), PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN), PHP_EOL;
+        echo Color::head("结果："), PHP_EOL;
+        echo Color::colorize(json_encode(array_flip($arr)), Color::FG_LIGHT_GREEN), PHP_EOL;
+
+    }
+
+    public function intersectKeyAction()
+    {
+        $arr1 = ['id' => 1, 'name' => 'limx', 'username' => 'limx'];
+        $arr2 = ['id' => 0, 'name' => 1, 'username' => 2, 'email' => '715557344@qq.com'];
+        echo Color::head("原数组1："), PHP_EOL;
+        echo Color::colorize(json_encode($arr1), Color::FG_LIGHT_GREEN), PHP_EOL;
+        echo Color::head("原数组2："), PHP_EOL;
+        echo Color::colorize(json_encode($arr2), Color::FG_LIGHT_GREEN), PHP_EOL;
+        echo Color::head("结果："), PHP_EOL;
+        echo Color::colorize(json_encode(array_intersect_key($arr1, $arr2)), Color::FG_LIGHT_GREEN), PHP_EOL;
 
     }
 
