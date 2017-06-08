@@ -19,7 +19,7 @@
         "limingxinleo/limx-pdo": "^1.2",
         "limingxinleo/easemob": "^1.0",
         "paypal/rest-api-sdk-php": "^1.11",
-        "limingxinleo/utils-redis": "^0.0.1",
+        "limingxinleo/utils-redis": "^0.0.2",
         "predis/predis": "^1.1",
         "illuminate/support": "^5.4",
         "overtrue/wechat": "~3.1",

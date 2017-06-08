@@ -12,6 +12,11 @@ class FileController extends \Phalcon\Mvc\Controller
         return $this->view->render('test/file', 'index');
     }
 
+    public function ajaxAction()
+    {
+        return $this->view->render('test/file', 'ajax');
+    }
+
     public function uploadAction()
     {
         $data = $this->request->get('data');
