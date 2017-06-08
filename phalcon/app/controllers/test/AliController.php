@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Test;
 
+use App\Utils\Log;
 use Sms\Request\V20160927 as Sms;
 
 class AliController extends Controller
@@ -14,9 +15,11 @@ class AliController extends Controller
         $c = new \AopClient();
         $c->gatewayUrl = "https://openapi.alipay.com/gateway.do";
         $c->appId = env("ALIPAY_APPID");
-        $c->rsaPrivateKey = env('ALIPAY_PRIKEY');
+        $c->rsaPrivateKey = env('ALIPAY_APP_PRIVATE_KEY');
+        // $c->signType = 'RSA2';
+        $c->postCharset = 'UTF-8';
         $c->format = "json";
-        $c->alipayrsaPublicKey = env('ALIPAY_PUBKEY');
+        $c->alipayrsaPublicKey = env('ALIPAY_ALI_PUBLIC_KEY');
         $req = new \AlipayTradeWapPayRequest();
         $data['out_trade_no'] = time();
         $data['total_amount'] = 0.01;
@@ -25,9 +28,16 @@ class AliController extends Controller
         $data['product_code'] = 'QUICK_WAP_PAY';
         $bizContent = json_encode($data);
         $req->setBizContent($bizContent);
+        $req->setNotifyUrl('https://demo.phalcon.lmx0536.cn/test/ali/notify');
 
         $form = $c->pageExecute($req);
         echo $form;
+    }
+
+    public function notifyAction()
+    {
+        $data = $this->request->get();
+        Log::debug(json_encode($data));
     }
 
     public function checkSignAction()
@@ -75,7 +85,7 @@ class AliController extends Controller
         $aop->rsaPrivateKey = env('MONSTER_ALIPAY_APP_PRIVATE_KEY');
         $aop->alipayrsaPublicKey = env('MONSTER_ALIPAY_ALI_PUBLIC_KEY');
         $aop->signType = 'RSA2';
-        $aop->postCharset='UTF-8';
+        $aop->postCharset = 'UTF-8';
         $aop->apiVersion = '1.0';
         $aop->format = 'json';
 
