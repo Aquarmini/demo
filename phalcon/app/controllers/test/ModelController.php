@@ -13,7 +13,7 @@ use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 use limx\tools\MyPDO;
 
-class ModelController extends ControllerBase
+class ModelController extends Controller
 {
 
     public function initAction()

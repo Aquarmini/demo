@@ -15,7 +15,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use Phalcon\Http\Client\Provider\Exception;
 
-class PaypalController extends ControllerBase
+class PaypalController extends Controller
 {
     private $apiContext;
 

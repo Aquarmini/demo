@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Test;
 
-use App\Controllers\Test\ControllerBase;
+use App\Controllers\Test\Controller;
 
-class SwooleController extends ControllerBase
+class SwooleController extends Controller
 {
 
     public function websocketAction()

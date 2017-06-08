@@ -4,7 +4,7 @@
 {% block js %}
     <script>
         $(function () {
-            var url = "http://phalcon.app/test/index/getParams";
+            var url = "http://demo.phalcon.lmx0536.cn/test/index/pfnAjax";
             var json = {
                 say: "hello world"
             };

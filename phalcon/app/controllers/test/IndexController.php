@@ -16,7 +16,7 @@ use limx\tools\MyPDO;
 use Phalcon\Logger\Adapter\Firephp;
 use Phalcon\Logger;
 
-class IndexController extends ControllerBase
+class IndexController extends Controller
 {
     public function initAction()
     {

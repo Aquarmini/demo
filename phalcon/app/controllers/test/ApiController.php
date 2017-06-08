@@ -5,7 +5,7 @@ namespace App\Controllers\Test;
 use Gregwar\Captcha\CaptchaBuilder;
 use limx\func\Curl;
 
-class ApiController extends ControllerBase
+class ApiController extends Controller
 {
 
     public function indexAction()

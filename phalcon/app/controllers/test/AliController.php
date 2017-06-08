@@ -4,7 +4,7 @@ namespace App\Controllers\Test;
 
 use Sms\Request\V20160927 as Sms;
 
-class AliController extends ControllerBase
+class AliController extends Controller
 {
 
     public function indexAction()

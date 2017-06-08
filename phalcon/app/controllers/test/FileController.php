@@ -2,9 +2,8 @@
 
 namespace App\Controllers\Test;
 
-use limx\func\Encoder;
 
-class FileController extends \Phalcon\Mvc\Controller
+class FileController extends Controller
 {
 
     public function indexAction()
@@ -14,6 +13,7 @@ class FileController extends \Phalcon\Mvc\Controller
 
     public function ajaxAction()
     {
+        // 具体操作查看Test\\Controller
         return $this->view->render('test/file', 'ajax');
     }
 

@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Test;
 
-use App\Controllers\Test\ControllerBase;
+use App\Controllers\Test\Controller;
 
-class H5Controller extends ControllerBase
+class H5Controller extends Controller
 {
 
     public function indexAction()
