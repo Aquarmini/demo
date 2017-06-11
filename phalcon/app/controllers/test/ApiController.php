@@ -79,11 +79,13 @@ class ApiController extends Controller
         $data = $this->request->get();
         $header = $this->request->getHeaders();
         $json = $this->request->getJsonRawBody();
+        $method = $this->request->getMethod();
 
         $res = [
             'header' => $header,
             'body' => $data,
             'json' => $json,
+            'method' => $method,
         ];
 
         return self::success($res);

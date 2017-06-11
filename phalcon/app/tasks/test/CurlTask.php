@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use limx\curl\Application;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 
@@ -28,7 +29,22 @@ class CurlTask extends Task
         echo Color::colorize('  postJson    [...$1]     POST json方法', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  postHttps   [...$1]     POST Https', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  header      [...$1]     获取Curl请求头的方法', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  utilsCurl               limingxinleo/utils-curl测试', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function utilsCurlAction()
+    {
+        $curl = new Application();
+        $url = 'https://demo.phalcon.lmx0536.cn/test/api/api';
+        $headers = [
+            'Test' => 'Test'
+        ];
+        $data = [
+            'Data' => 'Value'
+        ];
+        $result = $curl->client->setHeaders($headers)->post($url, $data)->getJsonContent();
+        print_r($result);
     }
 
     public function headerAction($params)
