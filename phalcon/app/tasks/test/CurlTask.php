@@ -30,6 +30,61 @@ class CurlTask extends Task
         echo Color::colorize('  postHttps   [...$1]     POST Https', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  header      [...$1]     获取Curl请求头的方法', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  utilsCurl               limingxinleo/utils-curl测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  multi                   multi模式', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function multiAction()
+    {
+        $url = 'https://demo.phalcon.lmx0536.cn/test/api/api';
+        $count = 10;
+
+        $starttime = microtime(true);
+        $mh = curl_multi_init();
+        for ($i = 0; $i < $count; $i++) {
+            $ch[$i] = curl_init();
+            curl_setopt($ch[$i], CURLOPT_URL, $url);
+            curl_setopt($ch[$i], CURLOPT_HEADER, 0); //不输出头
+            curl_setopt($ch[$i], CURLOPT_RETURNTRANSFER, 1); //exec返回结果而不是输出,用于赋值
+            curl_setopt($ch[$i], CURLOPT_FOLLOWLOCATION, 1);
+
+            curl_multi_add_handle($mh, $ch[$i]); //决定exec输出顺序
+        }
+        $running = null;
+        //执行批处理句柄(类似pthreads多线程里的start开始和join同步)
+        do {
+            //CURLOPT_RETURNTRANSFER如果为0,这里会直接输出获取到的内容.如果为1,后面可以用curl_multi_getcontent获取内容.
+            curl_multi_exec($mh, $running);
+            //阻塞直到cURL批处理连接中有活动连接,不加这个会导致CPU负载超过90%.
+            curl_multi_select($mh);
+        } while ($running > 0);
+        echo microtime(true) - $starttime . "\n"; //耗时约2秒
+        foreach ($ch as $v) {
+            $info[] = curl_getinfo($v);
+            $json[] = curl_multi_getcontent($v);
+            curl_multi_remove_handle($mh, $v);
+        }
+        curl_multi_close($mh);
+        $endtime = microtime(true);
+        echo Color::colorize("multi耗时：" . ($endtime - $starttime)) . PHP_EOL;
+        // print_r($info);
+        // print_r($json);
+
+        $starttime = microtime(true);
+        for ($i = 0; $i < $count; $i++) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, 0); //不输出头
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //exec返回结果而不是输出,用于赋值
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            //执行命令
+            $result = curl_exec($ch);
+            // print_r($result);
+            //关闭URL请求
+            curl_close($ch);
+        }
+        $endtime = microtime(true);
+        echo Color::colorize("普通耗时：" . ($endtime - $starttime)) . PHP_EOL;
 
     }
 
