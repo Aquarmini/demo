@@ -30,6 +30,16 @@ class LaravelTask extends \Phalcon\Cli\Task
         echo Color::colorize('  remove         集合移除测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  chunk          集合分组测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  contains       集合是否存在测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  arrayGet       array_get方法', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function arrayGetAction()
+    {
+        $arr = ['test' => ['hello' => 'world']];
+        print_r($arr);
+        $val = array_get($arr, 'test.hello');
+        echo Color::head("array_get:");
+        echo Color::colorize('  ' . $val, Color::FG_GREEN) . PHP_EOL;
     }
 
     public function containsAction()
