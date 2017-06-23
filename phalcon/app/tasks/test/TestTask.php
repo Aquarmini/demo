@@ -16,7 +16,6 @@ use Pimple\Container;
 
 class TestTask extends Task
 {
-
     public function mainAction()
     {
         echo Color::head('Help:'), PHP_EOL;
@@ -29,6 +28,15 @@ class TestTask extends Task
         echo Color::colorize('  sleep       延时脚本', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  switch      switch测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  pimple      pimple测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  callfunc    测试匿名函数传值', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function callfuncAction()
+    {
+        $res = function ($value) {
+            return $value;
+        };
+        print_r($res('Hello World!'));
     }
 
     public function pimpleAction()
