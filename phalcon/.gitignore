@@ -9,4 +9,7 @@ composer.lock
 storage/log/*
 storage/cache/*
 storage/meta/*
-data
+data/file
+data/nginx
+data/rsa
+data/ssl

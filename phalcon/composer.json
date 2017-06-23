@@ -25,7 +25,8 @@
         "overtrue/wechat": "~3.1",
         "pimple/pimple": "^3.0",
         "limingxinleo/redis-model": "^0.0.1",
-        "limingxinleo/utils-curl": "^0.1.1"
+        "limingxinleo/utils-curl": "^0.1.1",
+        "hightman/xunsearch": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",
