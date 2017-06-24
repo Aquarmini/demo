@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Utils\Log;
+
 class User extends Model
 {
 
@@ -86,6 +88,11 @@ class User extends Model
     {
         // Set the modification date
         $this->updated_at = date("Y-m-d H:i:s");
+    }
+
+    public function afterSave()
+    {
+        Log::info("USER MODEL SAVED!");
     }
 
 
