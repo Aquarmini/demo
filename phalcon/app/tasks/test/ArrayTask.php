@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
-use Phalcon\Cli\Task;
+use App\Tasks\Task;
 use limx\phalcon\Cli\Color;
 
 class ArrayTask extends Task

@@ -48,9 +48,10 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/locationIp') }}">所在的IP</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/view/post') }}">Post测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/file/ajax') }}">跨域测试</a>
-                <a type="button" class="btn btn-default" href="{{ url('test/xunsearch/index') }}">双峰控制器测试路由xunsearch</a>
                 <a type="button" class="btn btn-default"
-                   href="{{ url('test/xun_search/index') }}">双峰控制器测试路由xun_search</a>
+                   href="{{ url('test/searchengine/index') }}">双峰控制器测试路由searchengine</a>
+                <a type="button" class="btn btn-default"
+                   href="{{ url('test/search_engine/index') }}">双峰控制器测试路由search_engine</a>
             </div>
             <div class="col-md-12">
                 <h3>
@@ -137,9 +138,14 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/h5/particles') }}">particles.js</a>
             </div>
             <div class="col-md-12">
-                <h3>讯搜测试</h3>
-                <a type="button" class="btn btn-default" href="{{ url('test/xun_search/addDoc') }}">添加文档</a>
-                <a type="button" class="btn btn-default" href="{{ url('test/xun_search/searchDoc') }}">搜索文档</a>
+                <h3>搜索引擎</h3>
+                <a type="button" class="btn btn-default" href="{{ url('test/search_engine/xsAddDoc') }}">讯搜 - 添加文档</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/search_engine/xsSearchDoc') }}">
+                    讯搜 - 搜索文档
+                </a>
+                <a type="button" class="btn btn-default" href="{{ url('test/search_engine/esAddDoc') }}">
+                    Elasticsearch - 添加文档
+                </a>
             </div>
         </div>
     </div>
