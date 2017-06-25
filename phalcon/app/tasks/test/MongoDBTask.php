@@ -84,9 +84,10 @@ class MongoDBTask extends Task
     public function utilQueryAction()
     {
         $filter = ['id' => [Mongo::_GT => 1]];
-        $filter = ['id' => 999];
+        // $filter = ['id' => 999];
         $options = [
             'projection' => ['_id' => 0],
+            // 'sort' => ['create_at' => Mongo::SORT_ASC],
             'sort' => ['id' => Mongo::SORT_DESC],
             // Mongo::OPTION_LIMIT => '1',
         ];
