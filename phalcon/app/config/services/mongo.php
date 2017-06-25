@@ -6,7 +6,10 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-if ($config->mongo->utils) {
+use Phalcon\Mvc\Collection\Manager;
+use Phalcon\Db\Adapter\MongoDB\Client;
+
+if ($config->mongo->isUtils) {
     $di->setShared('mongoManager', function () use ($config) {
         $host = $config->mongo->host;
         $port = $config->mongo->port;
@@ -20,5 +23,31 @@ if ($config->mongo->utils) {
             'db' => $config->mongo->db // 覆盖$server字符串中的database段
         ];
         return new MongoDB\Driver\Manager($uri, $options);
+    });
+}
+
+if ($config->mongo->isCollection) {
+    // Initialise the mongo DB connection.
+    $di->setShared('mongo', function () use ($config) {
+
+        if (!$config->mongo->username || !$config->mongo->password) {
+            $dsn = 'mongodb://' . $config->mongo->host;
+        } else {
+            $dsn = sprintf(
+                'mongodb://%s:%s@%s',
+                $config->mongo->username,
+                $config->mongo->password,
+                $config->mongo->host
+            );
+        }
+
+        $mongo = new Client($dsn);
+
+        return $mongo->selectDatabase($config->mongo->db);
+    });
+
+    // Collection Manager is required for MongoDB
+    $di->setShared('collectionManager', function () {
+        return new Manager();
     });
 }

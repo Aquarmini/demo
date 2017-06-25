@@ -10,6 +10,7 @@ namespace App\Tasks\Test;
 
 use App\Logics\MongoTest;
 use App\Utils\Mongo;
+use limx\Support\Str;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 use MongoDB;
@@ -41,6 +42,47 @@ class MongoDBTask extends Task
         echo Color::colorize('  logicUpdate         逻辑层修改DB数据并更新Mongo缓存', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  logicFindFirst      获取DB数据并更新Mongo缓存', Color::FG_GREEN) . PHP_EOL;
 
+        echo Color::colorize('  collectionInsert    Mongo集合新增数据', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  collectionQuery     Mongo集合查询数据', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  collectionDelete    Mongo集合删除数据', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  collectionUpdate    Mongo集合更新数据', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function collectionInsertAction()
+    {
+        $user = new \App\Models\Collections\User();
+        $user->id = rand(1, 100);
+        $user->name = Str::quickRandom(16);
+        $user->save();
+    }
+
+    public function collectionQueryAction()
+    {
+        $user = \App\Models\Collections\User::findFirst([
+            'conditions' => ['id' => ['$gt' => 50]]
+        ]);
+
+        print_r($user->toArray());
+    }
+
+    public function collectionDeleteAction()
+    {
+        $count = \App\Models\Collections\User::count();
+        echo Color::colorize("当前文档数:" . $count) . PHP_EOL;
+
+        $user = \App\Models\Collections\User::findFirst([
+            'conditions' => ['id' => ['$gt' => 2]]
+        ]);
+        if ($user) $user->delete();
+
+        $count = \App\Models\Collections\User::count();
+        echo Color::colorize("当前文档数:" . $count) . PHP_EOL;
+    }
+
+    public function collectionUpdateAction()
+    {
+        
     }
 
     public function logicFindFirstAction()

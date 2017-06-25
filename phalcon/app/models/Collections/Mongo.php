@@ -1,19 +1,24 @@
 <?php
 // +----------------------------------------------------------------------
-// | redis 服务 [ WE CAN DO IT JUST THINK IT ]
+// | Mongo.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-use limx\phalcon\Redis;
+namespace App\Models\Collections;
 
-if ($config->redis->isUtils) {
-    $di->setShared('redis', function () use ($config) {
-        $host = $config->redis->host;
-        $port = $config->redis->port;
-        $auth = $config->redis->auth;
-        $db = $config->redis->index;
-        return Redis::getInstance($host, $auth, $db, $port);
-    });
+use Phalcon\Mvc\MongoCollection;
+
+abstract class Mongo extends MongoCollection
+{
+    /**
+     * Returns collection name mapped in the model
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        // 返回 Mongo 表名
+    }
 }

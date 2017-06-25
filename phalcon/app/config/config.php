@@ -92,6 +92,8 @@ return new Config(
             'persistent' => env('REDIS_PERSISTENT', false),
             'index' => env('REDIS_INDEX', 0),
             'prefix' => env('REDIS_PREFIX', ''),
+            // 是否开启Redis辅助类
+            'isUtils' => env('REDIS_IS_UTILS', false),
         ],
 
         /*
@@ -113,7 +115,9 @@ return new Config(
             'db' => env('MONGODB_DB', null),
             'collection' => env('MONGODB_COLLECTION', null),
             // 是否开启Mongo辅助类
-            'utils' => env('MONGODB_UTILS', false),
+            'isUtils' => env('MONGODB_IS_UTILS', false),
+            // 是否开启Mongo Collection集合类
+            'isCollection' => env('MONGODB_IS_COLLECTION', false),
         ],
 
         /*

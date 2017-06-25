@@ -29,6 +29,39 @@ class TestTask extends Task
         echo Color::colorize('  switch      switch测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  pimple      pimple测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  callfunc    测试匿名函数传值', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  incubator   测试incubator是否可以与phalcon扩展共用', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function incubatorAction()
+    {
+        // 文件地址都在vendor/phalcon/incubator/Library
+
+        // 增加Phalcon\Config.php 文件
+        /**
+         *  namespace Phalcon;
+         *  class Config
+         *  {
+         *      public function __construct()
+         *      {
+         *          echo "Phalcon\\Config" . PHP_EOL;
+         *      }
+         *  }
+         */
+
+        // 增加Phalcon\ConfigTest.php 文件
+        /**
+         *  namespace Phalcon;
+         *  class ConfigTest
+         *  {
+         *      public function __construct()
+         *      {
+         *          echo "Phalcon\\ConfigTest" . PHP_EOL;
+         *      }
+         *  }
+         */
+
+        $db = new \Phalcon\Config();
+        $db = new \Phalcon\ConfigTest();
     }
 
     public function callfuncAction()
