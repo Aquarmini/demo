@@ -1,22 +1,25 @@
 <?php
 // +----------------------------------------------------------------------
-// | Cookie 服务 [ WE CAN DO IT JUST THINK IT ]
+// | Config.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-use Phalcon\Http\Response\Cookies;
+namespace App\Services;
 
-$di->setShared(
-    "cookies",
-    function () use ($config) {
-        $cookies = new Cookies();
+use Phalcon\DI\FactoryDefault;
 
-        $cookies->useEncryption($config->cookies->isCrypt);
-
-        return $cookies;
+class Config implements ServiceProviderInterface
+{
+    public function register(FactoryDefault $di, \Phalcon\Config $config)
+    {
+        /**
+         * Shared configuration service
+         */
+        $di->setShared('config', function () use ($config) {
+            return $config;
+        });
     }
-);
 
-
+}

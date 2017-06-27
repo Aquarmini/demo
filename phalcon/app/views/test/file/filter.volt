@@ -4,8 +4,9 @@
 {% block js %}
     <script>
         $(function () {
-            var url = "http://demo.phalcon.lmx0536.cn/test/api/api";
+            var url = "/test/api/pfnFilter";
             var json = {
+                id: '33aff88',
                 say: "hello world",
                 body: {
                     test: 11,

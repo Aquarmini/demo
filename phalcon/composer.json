@@ -28,7 +28,7 @@
         "limingxinleo/utils-curl": "^0.1.1",
         "hightman/xunsearch": "^1.4",
         "limingxinleo/support-str": "^1.0",
-        "phalcon/incubator": "3.1.2"
+        "phalcon/incubator": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",

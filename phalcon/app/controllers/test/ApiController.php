@@ -91,5 +91,21 @@ class ApiController extends Controller
         return self::success($res);
     }
 
+    public function filterAction()
+    {
+        return $this->view->render('test/file', 'filter');
+    }
+
+    public function pfnFilterAction()
+    {
+        $filter = di('filter');
+        $filter->add('test', function ($value) {
+            return $value . ' test';
+        });
+
+        $id = $this->request->get('id', 'int');
+        $say = $this->request->get('say', 'test');
+        return self::success([$id, $say]);
+    }
 }
 

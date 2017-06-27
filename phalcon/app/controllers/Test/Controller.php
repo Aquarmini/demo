@@ -28,6 +28,7 @@ class Controller extends \App\Controllers\Controller
                 return dispatch_error(500, "测试错误！");
             }
         }
+
     }
 
     public function getName()

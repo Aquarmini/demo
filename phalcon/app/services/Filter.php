@@ -1,25 +1,26 @@
 <?php
 // +----------------------------------------------------------------------
-// | BOOTSTRAP [ WE CAN DO IT JUST THINK IT ]
+// | Filter.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-defined('APP_PATH') || define('APP_PATH', __DIR__);
-// use Phalcon\DI\FactoryDefault;
-use App\DI;
+namespace App\Services;
 
-/** Read the configuration */
-$config = include APP_PATH . "/config/config.php";
+use Phalcon\Config;
+use Phalcon\DI\FactoryDefault;
 
-/** Read auto-loader */
-include APP_PATH . "/config/loader.php";
+class Filter implements ServiceProviderInterface
+{
+    public function register(FactoryDefault $di, Config $config)
+    {
+        /**
+         * Phalcon\Filter
+         */
+        $di->setShared('filter', function () {
+            return new \Phalcon\Filter();
+        });
+    }
 
-/** 设置时区 */
-ini_set('date.timezone', $config->timezone);
-
-
-$di = (new DI($config))->getDI();
-
-return $di;
+}

@@ -82,7 +82,14 @@ class MongoDBTask extends Task
 
     public function collectionUpdateAction()
     {
-        
+        $user = \App\Models\Collections\User::findFirst([
+            'conditions' => ['id' => 95]
+        ]);
+
+        $user->name = Str::quickRandom(12);
+        $user->save();
+
+        print_r($user->toArray());
     }
 
     public function logicFindFirstAction()
@@ -170,6 +177,7 @@ class MongoDBTask extends Task
     {
         $filter = ['id' => 999];
         $document = ['name' => uniqid(), 'changed' => 2];
+        $document = ['name' => uniqid()];
         $options = [
             Mongo::OPTION_UPSERT => true,
             Mongo::OPTION_MULTI => true,

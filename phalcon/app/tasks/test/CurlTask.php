@@ -31,7 +31,25 @@ class CurlTask extends Task
         echo Color::colorize('  header      [...$1]     获取Curl请求头的方法', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  utilsCurl               limingxinleo/utils-curl测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  multi                   multi模式', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  postArr                 post 数组', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function postArrAction()
+    {
+        $curl = new Application();
+        $url = 'https://demo.phalcon.lmx0536.cn/test/api/api';
+        $headers = [
+            'Test' => 'Test'
+        ];
+        $data = [
+            'Data' => 'Value',
+            'Body' => [
+                'Test' => 'Hello World',
+            ],
+        ];
+        $result = $curl->client->setHeaders($headers)->post($url, $data)->getJsonContent();
+        print_r($result);
     }
 
     public function multiAction()
