@@ -39,10 +39,13 @@ class CurlTask extends Task
     {
         $curl = new Application();
         $url = 'https://demo.phalcon.lmx0536.cn/test/api/api';
+        $url = 'https://m.emmars.cn/log/info';
         $headers = [
             'Test' => 'Test'
         ];
         $data = [
+            'url_id' => 111,
+            'url' => 'page/index',
             'Data' => 'Value',
             'Body' => [
                 'Test' => 'Hello World',
