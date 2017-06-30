@@ -12,6 +12,7 @@ namespace App\Tasks\Test;
 use App\Utils\Log;
 use limx\phalcon\Redis;
 use limx\phalcon\Cli\Color;
+use Phalcon\Exception;
 
 class QueueTask extends \App\Tasks\System\QueueTask
 {
@@ -44,6 +45,9 @@ class QueueTask extends \App\Tasks\System\QueueTask
     protected function handle($data)
     {
         echo Color::success($data);
+        if (rand(1, 100) < 10) {
+            throw new Exception("BUG");
+        }
         Log::info($data);
     }
 
