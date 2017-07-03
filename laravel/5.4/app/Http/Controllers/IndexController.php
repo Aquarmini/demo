@@ -35,4 +35,33 @@ class IndexController extends Controller
         $job = new Timer(time());
         dispatch($job);
     }
+
+    public function params($id, Request $request, $name)
+    {
+        dump($request);
+        dump("ID " . $id);
+        dump("Name " . $name);
+    }
+
+    public function calltest(Request $request)
+    {
+        $params = ['key' => 'key', 'request' => $request, 'val' => 'val',];
+        $class = new \ReflectionClass(\App\Http\Controllers\IndexController::class);
+        $method = $class->getMethod('callStatic');
+        $fields = [];
+        foreach ($method->getParameters() as $param) {
+            $fields[] = $params[$param->getName()];
+        }
+        dump($method);
+        dump($fields);
+        static::callStatic(...$fields);
+        // static::callStatic(...$params);
+    }
+
+    public static function callStatic($key, $val, Request $request)
+    {
+        dump($key);
+        dump($val);
+        dump($request);
+    }
 }
