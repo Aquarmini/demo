@@ -107,5 +107,39 @@ class ApiController extends Controller
         $say = $this->request->get('say', 'test');
         return self::success([$id, $say]);
     }
+
+    public function validationAction()
+    {
+        return $this->view->render('test/file', 'validation');
+    }
+
+    public function pfnValidationAction()
+    {
+        $validation = new \Phalcon\Validation();
+        $validation->add(
+            'id',
+            new \Phalcon\Validation\Validator\Callback(
+                [
+                    'callback' => function ($data) {
+                        return $data['id'] % 2 == 0;
+                    },
+                    'message' => 'Id 必须能被２整除'
+                ]
+            )
+        );
+
+        $messages = $validation->validate($this->request->get());
+
+        if ($messages->valid()) {
+            $error = '';
+            foreach ($messages as $msg) {
+                $error .= $msg->getMessage();
+            }
+            return self::error($error);
+        }
+        $id = $this->request->get('id', 'int');
+        $say = $this->request->get('say');
+        return self::success([$id, $say]);
+    }
 }
 
