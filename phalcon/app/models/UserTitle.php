@@ -9,14 +9,6 @@ class UserTitle extends Model
      *
      * @var integer
      * @Primary
-     * @Identity
-     * @Column(type="integer", length=10, nullable=false)
-     */
-    public $id;
-
-    /**
-     *
-     * @var integer
      * @Column(type="integer", length=11, nullable=false)
      */
     public $uid;
@@ -24,6 +16,7 @@ class UserTitle extends Model
     /**
      *
      * @var integer
+     * @Primary
      * @Column(type="integer", length=11, nullable=false)
      */
     public $title_id;

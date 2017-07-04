@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\Test;
 
+use App\Models\UserTitle;
 use limx\Support\Str;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
@@ -26,7 +27,19 @@ class MysqlTask extends Task
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  inc             新建记录如果重复则修改', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  modelSave       通过模型新建数据', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  modelUpdate       通过模型新建数据', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  modelUpdate     通过模型更新数据', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  modelUpdateNoIndex     通过模型更新没有主键的数据', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function modelUpdateNoIndexAction()
+    {
+        $res = UserTitle::findFirst([
+            'conditions' => 'uid=?0',
+            'bind' => [1, 8],
+        ]);
+        print_r($res->toArray());
+        $res->title_id = 4;
+        $res->save();
     }
 
     public function modelSaveAction()

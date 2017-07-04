@@ -25,6 +25,13 @@ class DbTask extends Task
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  execute             执行sql并返回影响的行数', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  where               测试WHERE区间方法', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  exist               测试表是否存在方法', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function existAction()
+    {
+        $res = \App\Utils\DB::tableExists('user');
+        print_r($res);
     }
 
     public function executeAction()

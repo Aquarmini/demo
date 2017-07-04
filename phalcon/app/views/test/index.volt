@@ -128,6 +128,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchV2Near') }}">
                     OpenSearch v2版本 搜索附近的文档
                 </a>
+                <a type="button" class="btn btn-default" href="{{ url('test/ali/credit') }}">芝麻信用</a>
             </div>
             <div class="col-md-12">
                 <h3>

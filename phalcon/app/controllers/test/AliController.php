@@ -211,6 +211,57 @@ class AliController extends Controller
         return $this->view->render("test/ali", "alimobile");
     }
 
+    public function creditAction()
+    {
+        library('alipay/AopSdk.php');
+        $code = $this->request->get('auth_code');
+        $appid = env('MONSTER_ALIPAY_APPID');
+        $redirect_uri = env('MONSTER_ALIPAY_REDIRECT_URI');
+        if (empty($code)) {
+            // 获取code
+            $url = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?';
+            $params = [
+                'app_id' => $appid,
+                'scope' => 'auth_zhima',
+                'redirect_uri' => $redirect_uri
+            ];
+            return $this->response->redirect($url . http_build_query($params));
+        }
+
+        $aop = new \AopClient();
+        $aop->gatewayUrl = 'https://openapi.alipay.com/gateway.do';
+        $aop->appId = env('MONSTER_ALIPAY_APPID');
+        $aop->rsaPrivateKey = env('MONSTER_ALIPAY_APP_PRIVATE_KEY');
+        $aop->alipayrsaPublicKey = env('MONSTER_ALIPAY_ALI_PUBLIC_KEY');
+        $aop->signType = 'RSA2';
+        $aop->postCharset = 'UTF-8';
+        $aop->apiVersion = '1.0';
+        $aop->format = 'json';
+
+        $request = new \AlipaySystemOauthTokenRequest();
+        $request->setGrantType("authorization_code");
+        $request->setCode($code);
+        $result = $aop->execute($request);
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $user_id = $result->$responseNode->user_id;
+        $access_token = $result->$responseNode->access_token;
+
+        $request = new \ZhimaCreditScoreGetRequest ();
+        $request->setBizContent("{" .
+            " \"transaction_id\":\"201512100936588040000000465158\"," . " \"product_code\":\"w1010100100000000001\"" .
+            " }");
+        $result = $aop->execute($request, $access_token);
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $resultCode = $result->$responseNode->code;
+        if (!empty($resultCode) && $resultCode == 10000) {
+            echo "成功";
+            print_r($result->$responseNode);
+        } else {
+            echo "失败";
+            print_r($result->$responseNode);
+        }
+    }
+
     // *********************** 开放搜索 v3.0 **************************
 
     private function openSearchClient()
