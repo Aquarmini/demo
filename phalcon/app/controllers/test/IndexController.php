@@ -25,6 +25,7 @@ class IndexController extends Controller
 
     public function infoAction()
     {
+        exit;
         echo phpinfo();
     }
 
