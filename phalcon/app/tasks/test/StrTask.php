@@ -25,6 +25,25 @@ class StrTask extends Task
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  random      {$1}        随机字符串', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  strPad                  不足位数补0', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  strstr                  检测字符串是否包含另外一个字符串', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function strstrAction()
+    {
+        $str = 'asdfinfo3-erroradsf';
+        $res = strstr($str, 'info4-error');
+        if ($res) {
+            echo 'success';
+        } else {
+            echo 'error';
+        }
+
+        $res = strstr($str, 'info3-error');
+        if ($res) {
+            echo 'success';
+        } else {
+            echo 'error';
+        }
     }
 
     public function strPadAction()

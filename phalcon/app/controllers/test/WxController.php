@@ -158,6 +158,26 @@ class WxController extends \Phalcon\Mvc\Controller
         dump($user);
     }
 
+    public function tempSmsAction()
+    {
+        $config = app('easywechat')->toArray();
+        $app = new Application($config);
+        $mini_program = $app->mini_program;
+        $res = $mini_program->notice->send([
+            'touser' => 'obNXt0IE0fVMeBxsJlUsN6SNvupk',
+            'template_id' => 'b8oScGlt4Ou8SdWeTlz8BBlsRpSd1xcXjpPIpRPwDYA',
+            'url' => 'xxxxx',
+            'form_id' => 'FORMID',
+            'data' => [
+                'keyword1' => '工作汇报',
+                'keyword2' => '多日没有收到订单',
+                'keyword3' => '5条'
+            ],
+        ]);
+
+        print_r($res);
+    }
+
     private function httpGet($url, $params)
     {
         $body = http_build_query($params);

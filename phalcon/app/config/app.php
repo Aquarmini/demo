@@ -30,7 +30,7 @@ return [
         /**
          * 账号基本信息，请从微信公众平台/开放平台获取
          */
-        'app_id' => env('WECHAT_OPENID', 'your-app-id'),         // AppID
+        'app_id' => env('WECHAT_APPID', 'your-app-id'),         // AppID
         'secret' => env('WECHAT_APPSECRET', 'your-app-secret'),     // AppSecret
         'token' => 'your-token',          // Token
         'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
@@ -78,6 +78,16 @@ return [
         'guzzle' => [
             'timeout' => 3.0, // 超时时间（秒）
             //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+        ],
+
+        /**
+         * 小程序
+         */
+        'mini_program' => [
+            'app_id' => env('MONSTER_MINI_PROGRAM_APPID'),
+            'secret' => env('MONSTER_MINI_PROGRAM_SECRET'),
+            'token' => env('MONSTER_MINI_PROGRAM_TOKEN'),
+            'aes_key' => env('MONSTER_MINI_PROGRAM_AESKEY'),
         ],
     ],
 ];
