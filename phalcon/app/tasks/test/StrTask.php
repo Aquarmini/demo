@@ -11,6 +11,7 @@ namespace App\Tasks\Test;
 use limx\phalcon\Utils\Str;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
+use Phalcon\Text;
 
 class StrTask extends Task
 {
@@ -26,6 +27,50 @@ class StrTask extends Task
         echo Color::colorize('  random      {$1}        随机字符串', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  strPad                  不足位数补0', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  strstr                  检测字符串是否包含另外一个字符串', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  textRandom              Phalcon\\Text随机字符串', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  camelize                大驼峰转化', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function camelizeAction()
+    {
+        $str = 'HelloWorld';
+        echo Color::colorize("Text::uncamelize($str)=" . Text::uncamelize($str)) . PHP_EOL;
+        $str = 'HelloWorld';
+        echo Color::colorize("Text::uncamelize($str,'-')=" . Text::uncamelize($str, '-')) . PHP_EOL;
+
+        $str = 'hello_world';
+        echo Color::colorize("Text::camelize($str,'-')=" . Text::camelize($str, '-')) . PHP_EOL;
+
+        $str = 'hello_world';
+        echo Color::colorize("Text::camelize($str)=" . Text::camelize($str)) . PHP_EOL;
+
+        $str = 'hello_world';
+        echo Color::colorize("lcfirst(Text::camelize($str))=" . lcfirst(Text::camelize($str))) . PHP_EOL;
+
+        $str = 'hello _world';
+        echo Color::colorize("lcfirst(Text::camelize($str))=" . lcfirst(Text::camelize($str))) . PHP_EOL;
+
+    }
+
+    public function textRandomAction()
+    {
+        $str = Text::random(Text::RANDOM_NUMERIC, 12);
+        echo Color::colorize("RANDOM_NUMERIC " . $str, Color::FG_GREEN) . PHP_EOL;
+
+        $str = Text::random(Text::RANDOM_ALNUM, 12);
+        echo Color::colorize("RANDOM_ALNUM " . $str, Color::FG_GREEN) . PHP_EOL;
+
+        $str = Text::random(Text::RANDOM_ALPHA, 12);
+        echo Color::colorize("RANDOM_ALPHA " . $str, Color::FG_GREEN) . PHP_EOL;
+
+        $str = Text::random(Text::RANDOM_DISTINCT, 12);
+        echo Color::colorize("RANDOM_DISTINCT " . $str, Color::FG_GREEN) . PHP_EOL;
+
+        $str = Text::random(Text::RANDOM_HEXDEC, 12);
+        echo Color::colorize("RANDOM_HEXDEC " . $str, Color::FG_GREEN) . PHP_EOL;
+
+        $str = Text::random(Text::RANDOM_NOZERO, 12);
+        echo Color::colorize("RANDOM_NOZERO " . $str, Color::FG_GREEN) . PHP_EOL;
     }
 
     public function strstrAction()

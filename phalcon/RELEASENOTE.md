@@ -6,8 +6,10 @@
 
 ### Added
 * 扩展DB工具类
+* 增加工具类接口
 
 ### Changed
+* 重写逻辑层FromCache模块 并增加相应单元测试
 
 ### Fixed
 * 修改调度器不生效的BUG
