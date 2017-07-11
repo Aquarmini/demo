@@ -11,9 +11,12 @@ class AlipayController extends Controller
 {
     protected $redirectUrl;
 
+    protected $appUrl;
+
     public function initialize()
     {
         $this->redirectUrl = env("MONSTER_ALIPAY_REDIRECT_URI");
+        $this->appUrl = env('APP_URL');
         parent::initialize();
     }
 
@@ -66,9 +69,9 @@ class AlipayController extends Controller
     {
         $client = AlipayClient::getInstance();
 
-        $return_url = $this->redirectUrl . "/test/alipay/return";
-        $cancel_url = $this->redirectUrl . "/test/alipay/cancel";
-        $notify_url = $this->redirectUrl . "/test/alipay/notify";
+        $return_url = $this->appUrl . "/test/alipay/return";
+        $cancel_url = $this->appUrl . "/test/alipay/cancel";
+        $notify_url = $this->appUrl . "/test/alipay/notify";
         $out_trade_no = "ORDER" . uniqid();
 
         $result = $client->withholdingCreateAndPay(
@@ -88,9 +91,9 @@ class AlipayController extends Controller
     {
         $client = AlipayClient::getInstance();
 
-        $return_url = $this->redirectUrl . "/test/alipay/return";
-        $cancel_url = $this->redirectUrl . "/test/alipay/cancel";
-        $notify_url = $this->redirectUrl . "/test/alipay/signNotify";
+        $return_url = $this->appUrl . "/test/alipay/return";
+        $cancel_url = $this->appUrl . "/test/alipay/cancel";
+        $notify_url = $this->appUrl . "/test/alipay/signNotify";
         $out_trade_no = "ORDER" . uniqid();
 
         $result = $client->withholdingSign($return_url, $notify_url);
@@ -164,9 +167,9 @@ class AlipayController extends Controller
     {
         $client = AlipayClient::getInstance();
 
-        $return_url = $this->redirectUrl . "/test/alipay/return";
-        $cancel_url = $this->redirectUrl . "/test/alipay/cancel";
-        $notify_url = $this->redirectUrl . "/test/alipay/payNotify";
+        $return_url = $this->appUrl . "/test/alipay/return";
+        $cancel_url = $this->appUrl . "/test/alipay/cancel";
+        $notify_url = $this->appUrl . "/test/alipay/payNotify";
         $out_trade_no = "ORDER" . uniqid();
         $aggrement_no = Cache::get('agreement_no'); // 签约返回的NO
         $result = $client->withholdingPay($aggrement_no, $out_trade_no, 0.01, $return_url, $notify_url);
@@ -222,6 +225,28 @@ class AlipayController extends Controller
 
             echo "fail";
         }
+    }
+
+    public function creditAction()
+    {
+        $client = AlipayClient::getInstance();
+        $code = $this->request->get('auth_code');
+        if (empty($code)) {
+            $redirect_url = $this->redirectUrl . "/test/alipay/credit";
+            $url = $client->getOauthCodeUrl($redirect_url, 'auth_zhima');
+            return $this->response->redirect($url);
+        }
+
+        $oauth_info = $client->getOauthInfo($code);
+
+        dump($this->request->get());
+        dump($oauth_info);
+
+        $access_token = $oauth_info->access_token;
+
+        $creditinfo = $client->getCreditScore($access_token);
+
+        dump($creditinfo);
     }
 
     public function cancelAction()

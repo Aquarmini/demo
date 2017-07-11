@@ -11,11 +11,13 @@ namespace App\Library\Alipay;
 use AopClient;
 use AlipaySystemOauthTokenRequest;
 use AlipayTradeWapPayRequest;
+use ZhimaCreditScoreGetRequest;
 use AlipayAcquireCreateandpayRequest;
 use App\Library\Alipay\Mapi\AlipayNotify;
 use App\Library\Alipay\Mapi\AlipaySubmit;
 use App\Library\Alipay\Mapi\Config;
 use App\Utils\Log;
+use limx\Support\Str;
 
 class AlipayClient
 {
@@ -83,12 +85,12 @@ class AlipayClient
         return $aop;
     }
 
-    public function getOauthCodeUrl($redirect_uri)
+    public function getOauthCodeUrl($redirect_uri, $scope = 'auth_user')
     {
         $url = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?';
         $params = [
             'app_id' => $this->appId,
-            'scope' => 'auth_user',
+            'scope' => $scope,
             'redirect_uri' => $redirect_uri
         ];
         return $url . http_build_query($params);
@@ -139,6 +141,17 @@ class AlipayClient
         Log::info($notifyUrl);
         // return $this->aopClient->pageExecute($req, "GET");
         return $this->aopClient->pageExecute($req, "POST");
+    }
+
+    public function getCreditScore($accessToken)
+    {
+        $request = new ZhimaCreditScoreGetRequest();
+        $data['transaction_id'] = Str::random(64);
+        $data['product_code'] = 'w1010100100000000001';
+        $request->setBizContent(json_encode($data));
+        $result = $this->aopClient->execute($request, $accessToken);
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        return $result->$responseNode;
     }
 
     /**

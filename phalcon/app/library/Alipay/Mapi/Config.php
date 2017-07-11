@@ -21,7 +21,7 @@ class Config implements \ArrayAccess
         $this->item['seller_id'] = env("MONSTER_ALIPAY_SELLERID");
         $this->item['sign_type'] = strtoupper('MD5');
         $this->item['input_charset'] = strtolower('UTF-8');
-        $this->item['cacert'] = ROOT_PATH . '/data/wechat/cacert.pem';
+        $this->item['cacert'] = ROOT_PATH . '/data/alipay/cacert.pem';
         $this->item['transport'] = 'http';
     }
 
