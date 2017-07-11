@@ -262,6 +262,74 @@ class AliController extends Controller
         }
     }
 
+    /**
+     * @desc   信用借还订单创建
+     * @author limx
+     */
+    public function mOrderCreateAction()
+    {
+        library('alipay/AopSdk.php');
+        $code = $this->request->get('auth_code');
+        $appid = env('MONSTER_ALIPAY_APPID');
+        $redirect_uri = env('MONSTER_ALIPAY_REDIRECT_URI');
+        if (empty($code)) {
+            // 获取code
+            $url = 'https://openauth.alipay.com/oauth2/appToAppAuth.htm?';
+            $params = [
+                'app_id' => $appid,
+                // 'scope' => 'auth_zhima',
+                'redirect_uri' => $redirect_uri
+            ];
+            return $this->response->redirect($url . http_build_query($params));
+        }
+
+        $aop = new \AopClient();
+        $aop->gatewayUrl = 'https://openapi.alipay.com/gateway.do';
+        $aop->appId = env('MONSTER_ALIPAY_APPID');
+        $aop->rsaPrivateKey = env('MONSTER_ALIPAY_APP_PRIVATE_KEY');
+        $aop->alipayrsaPublicKey = env('MONSTER_ALIPAY_ALI_PUBLIC_KEY');
+        $aop->apiVersion = '1.0';
+        $aop->signType = 'RSA2';
+        $aop->postCharset = 'UTF-8';
+        $aop->format = 'json';
+        $request = new \ZhimaMerchantOrderRentCreateRequest();
+        $request->setBizContent("{" .
+            "\"invoke_type\":\"WINDOWS\"," .
+            "\"invoke_return_url\":\"https://demo.phalcon.lmx0536.cn/test/ali/mOrderCreate\"," .
+            "\"notify_url\":\"废弃，使用蚂蚁开放平台应用中的网关地址\"," .
+            "\"invoke_state\":\"{\\\"xxx\\\":\\\"xxx\\\"}\"," .
+            "\"out_order_no\":\"" . time() . "\"," .
+            "\"product_code\":\"w1010100000000002858\"," .
+            "\"goods_name\":\"充电宝\"," .
+            "\"rent_info\":\"2小时内免费，超过2小时 2元/小时\"," .
+            "\"rent_unit\":\"DAY_YUAN\"," .
+            "\"rent_amount\":\"0.00\"," .
+            "\"deposit_amount\":\"1.00\"," .
+            "\"deposit_state\":\"Y\"," .
+            "\"borrow_cycle\":\"2\"," .
+            "\"borrow_cycle_unit\":\"HOUR\"," .
+            "\"borrow_shop_name\":\"肯德基文三路门店\"," .
+            "\"name\":\"张三\"," .
+            "\"cert_no\":\"310101198001012567\"," .
+            "\"rent_settle_type\":\"alipay\"," .
+            "\"borrow_time\":\"2017-04-27 10:01:01\"," .
+            "\"expiry_time\":\"2017-04-30 12:06:31\"," .
+            "\"mobile_no\":\"13088888888\"," .
+            "\"address\":\"浙江省杭州市西湖区万塘路18号黄龙时代广场B座2楼101室\"" .
+            "  }");
+        $result = $aop->execute($request);
+
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $resultCode = $result->$responseNode->code;
+        print_r($result);
+        print_r($result->$responseNode);
+        if (!empty($resultCode) && $resultCode == 10000) {
+            echo "成功";
+        } else {
+            echo "失败";
+        }
+    }
+
     // *********************** 开放搜索 v3.0 **************************
 
     private function openSearchClient()

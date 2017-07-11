@@ -3,7 +3,7 @@
  * ALIPAY API: alipay.eco.cplife.roominfo.delete request
  *
  * @author auto create
- * @since 1.0, 2016-11-18 16:08:51
+ * @since 1.0, 2017-03-02 18:17:11
  */
 class AlipayEcoCplifeRoominfoDeleteRequest
 {

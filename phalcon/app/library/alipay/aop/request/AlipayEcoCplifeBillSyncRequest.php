@@ -3,7 +3,7 @@
  * ALIPAY API: alipay.eco.cplife.bill.sync request
  *
  * @author auto create
- * @since 1.0, 2016-08-11 11:51:47
+ * @since 1.0, 2017-02-10 18:55:14
  */
 class AlipayEcoCplifeBillSyncRequest
 {

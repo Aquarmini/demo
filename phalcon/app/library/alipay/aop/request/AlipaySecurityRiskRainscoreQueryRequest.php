@@ -3,7 +3,7 @@
  * ALIPAY API: alipay.security.risk.rainscore.query request
  *
  * @author auto create
- * @since 1.0, 2016-09-20 14:23:46
+ * @since 1.0, 2017-03-21 10:28:01
  */
 class AlipaySecurityRiskRainscoreQueryRequest
 {

@@ -3,7 +3,7 @@
  * ALIPAY API: koubei.marketing.data.smartactivity.config request
  *
  * @author auto create
- * @since 1.0, 2016-10-25 21:43:09
+ * @since 1.0, 2017-04-13 10:58:55
  */
 class KoubeiMarketingDataSmartactivityConfigRequest
 {

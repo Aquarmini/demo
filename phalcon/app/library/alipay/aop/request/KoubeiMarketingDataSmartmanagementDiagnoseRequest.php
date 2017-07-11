@@ -3,7 +3,7 @@
  * ALIPAY API: koubei.marketing.data.smartmanagement.diagnose request
  *
  * @author auto create
- * @since 1.0, 2016-09-10 19:12:49
+ * @since 1.0, 2017-03-14 16:50:04
  */
 class KoubeiMarketingDataSmartmanagementDiagnoseRequest
 {

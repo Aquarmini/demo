@@ -3,7 +3,7 @@
  * ALIPAY API: alipay.offline.market.shop.applyorder.cancel request
  *
  * @author auto create
- * @since 1.0, 2016-07-04 15:53:02
+ * @since 1.0, 2017-02-07 16:46:35
  */
 class AlipayOfflineMarketShopApplyorderCancelRequest
 {

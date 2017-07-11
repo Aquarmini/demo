@@ -3,7 +3,7 @@
  * ALIPAY API: alipay.asset.account.get request
  *
  * @author auto create
- * @since 1.0, 2016-10-11 19:39:10
+ * @since 1.0, 2017-04-07 18:05:33
  */
 class AlipayAssetAccountGetRequest
 {

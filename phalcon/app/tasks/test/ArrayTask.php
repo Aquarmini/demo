@@ -215,8 +215,8 @@ class ArrayTask extends Task
 
     public function diffAction()
     {
-        $arr1 = [1, 2, 3, '4' => 4, '5' => 5];
-        $arr2 = [2, 3, '5' => 5, '6' => 5];
+        $arr1 = [1, 2, 3, '4' => 4, '5' => 5, 6, 7];
+        $arr2 = [2, 3, '5' => 5, '6' => 5, 6, 8];
         echo Color::head("原数组："), PHP_EOL;
         echo Color::colorize(json_encode($arr1), Color::FG_LIGHT_GREEN), PHP_EOL;
         echo Color::colorize(json_encode($arr2), Color::FG_LIGHT_GREEN), PHP_EOL;
