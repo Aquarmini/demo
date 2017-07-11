@@ -330,6 +330,15 @@ class AliController extends Controller
         }
     }
 
+    /**
+     * @desc   普通代扣
+     * @author limx
+     */
+    public function signAndPayAction()
+    {
+        library('alipay/AopSdk.php');
+    }
+
     // *********************** 开放搜索 v3.0 **************************
 
     private function openSearchClient()

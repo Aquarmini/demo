@@ -9,6 +9,7 @@
 namespace App\Controllers;
 
 use App\Traits\System\Response;
+use App\Utils\Log;
 
 abstract class Controller extends \Phalcon\Mvc\Controller
 {
@@ -21,6 +22,8 @@ abstract class Controller extends \Phalcon\Mvc\Controller
     public function beforeExecuteRoute()
     {
         // 在每一个找到的动作前执行
+        $url = $this->request->getURI();
+        Log::info("URI " . $url);
     }
 
     public function afterExecuteRoute()

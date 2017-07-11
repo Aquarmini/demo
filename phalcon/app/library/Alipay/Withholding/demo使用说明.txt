@@ -1,0 +1,54 @@
+﻿
+            ╭───────────────────────╮
+    ────┤           支付宝代码示例结构说明             ├────
+            ╰───────────────────────╯ 
+　                                                                  
+　       接口名称：支付宝商户代扣接口（alipay.acquire.page.createandpay）
+         开发语言：PHP
+         版    权：支付宝（中国）网络技术有限公司
+
+    ─────────────────────────────────
+
+说明：本demo仅供效果演示及接口调用参考，具体业务逻辑请开发者自行实现。
+
+───────
+ 代码文件结构
+───────
+
+alipay.acquire.page.createandpay-PHP-UTF-8
+  │   
+  ├lib┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈类文件夹
+  │  │
+  │  ├alipay_core.function.php ┈┈┈┈┈┈支付宝接口公用函数文件
+  │  │
+  │  ├alipay_notify.class.php┈┈┈┈┈┈┈支付宝通知处理类文件
+  │  │
+  │  ├alipay_submit.class.php┈┈┈┈┈┈┈支付宝各接口请求提交类文件
+  │  │
+  │  └alipay_md5.function.php┈┈┈┈┈┈┈支付宝接口MD5函数文件
+  │
+  ├alipay.config.php┈┈┈┈┈┈┈┈┈┈┈┈基础配置类文件
+  │
+  ├index.php ┈┈┈┈┈签约并支付页面
+  │
+  ├alipayapi.php ┈┈┈┈┈完成签约并支付
+  │
+  ├agreementQuery.php ┈┈┈┈┈签约查询
+  │
+  ├agreementUnsign.php ┈┈┈┈┈解约
+  │
+  ├createandpay.php ┈┈┈┈┈扣款
+  │
+  ├notify_url.php ┈┈┈┈┈扣款异步通知
+  │
+  ├notifyUrl.php ┈┈┈┈┈签约异步通知
+  │
+  └return_url.php ┈┈┈┈┈签约并支付后的同步返回
+
+
+
+※注意※
+
+1、必须开启curl服务
+（1）使用Crul需要修改服务器中php.ini文件的设置，找到php_curl.dll去掉前面的";"即可
+（2）文件夹中cacert.pem文件请务必放置到商户网站平台中（如：服务器上），并且保证其路径有效，提供的代码demo中的默认路径是当前文件夹下——getcwd().'\\cacert.pem'
