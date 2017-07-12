@@ -246,9 +246,17 @@ class AlipayClient
 
         $config = new Config();
         $alipaySubmit = new AlipaySubmit($config);
-        $html_text = $alipaySubmit->buildRequestForm($data);
+        $xmlstr = $alipaySubmit->buildRequestHttp($data);
 
-        return $html_text;
+        $alipayNotify = new AlipayNotify($config);
+        $verify_result = $alipayNotify->verifySign($xmlstr);
+
+        if ($verify_result) {
+            //解析XML
+            $resParameter = $alipayNotify->getRspFromXML($xmlstr);
+            return $resParameter;
+        }
+        return null;
     }
 
     public function mapiVerify()

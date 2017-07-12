@@ -177,7 +177,6 @@ class AlipayController extends Controller
         $result = $client->withholdingPay($aggrement_no, $out_trade_no, 0.01, $return_url, $notify_url);
 
         dump($result);
-        return $this->response->redirect($result);
     }
 
     /**
@@ -231,9 +230,10 @@ class AlipayController extends Controller
 
     public function zhimaAuthAction()
     {
+        $mobile = $this->request->get('mobile');
         // 芝麻设置回调地址为 zhimaAuthRet
         $client = ZhimaClient::getInstance();
-        $auth_url = $client->getAuthInfoByMobile('18678017521');
+        $auth_url = $client->getAuthInfoByMobile($mobile);
 
         dump($this->request->get());
         dump($auth_url);
