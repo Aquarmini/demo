@@ -30,6 +30,13 @@ class TestTask extends Task
         echo Color::colorize('  pimple      pimple测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  callfunc    测试匿名函数传值', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  incubator   测试incubator是否可以与phalcon扩展共用', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  date        YmdHis', Color::FG_GREEN), PHP_EOL;
+
+    }
+
+    public function dateAction()
+    {
+        echo date("YmdHis") . round(microtime() * 1000), PHP_EOL;
     }
 
     public function incubatorAction()

@@ -57,7 +57,7 @@ class AlipayClient
         $this->sellerId = env("MONSTER_ALIPAY_SELLERID");
         $this->parterId = env("MONSTER_ALIPAY_PID");
 
-        include __DIR__ . '/AopSdk.php';
+        include_once __DIR__ . '/AopSdk.php';
 
         $this->aopClient = $this->getAopClient();
     }

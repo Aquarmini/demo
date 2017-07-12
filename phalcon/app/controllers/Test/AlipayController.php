@@ -3,8 +3,10 @@
 namespace App\Controllers\Test;
 
 use App\Library\Alipay\AlipayClient;
+use App\Library\Alipay\ZhimaClient;
 use App\Utils\Cache;
 use App\Utils\Log;
+use function GuzzleHttp\Psr7\parse_query;
 use limx\Support\Str;
 
 class AlipayController extends Controller
@@ -227,26 +229,42 @@ class AlipayController extends Controller
         }
     }
 
-    public function creditAction()
+    public function zhimaAuthAction()
     {
-        $client = AlipayClient::getInstance();
-        $code = $this->request->get('auth_code');
-        if (empty($code)) {
-            $redirect_url = $this->redirectUrl . "/test/alipay/credit";
-            $url = $client->getOauthCodeUrl($redirect_url, 'auth_zhima');
-            return $this->response->redirect($url);
-        }
-
-        $oauth_info = $client->getOauthInfo($code);
+        // 芝麻设置回调地址为 zhimaAuthRet
+        $client = ZhimaClient::getInstance();
+        $auth_url = $client->getAuthInfoByMobile('18678017521');
 
         dump($this->request->get());
-        dump($oauth_info);
+        dump($auth_url);
 
-        $access_token = $oauth_info->access_token;
+        return $this->response->redirect($auth_url);
+    }
 
-        $creditinfo = $client->getCreditScore($access_token);
+    public function zhimaAuthRetAction()
+    {
+        $params = $this->request->get('params');
+        $sign = $this->request->get('sign');
 
-        dump($creditinfo);
+        $client = ZhimaClient::getInstance();
+        $result_str = $client->getAuthInfoResult($params, $sign);
+        $result = [];
+        if ($result_str) {
+            parse_str($result_str, $result);
+            $open_id = $result['open_id'];
+            $error_message = $result['error_message'];
+            $status = $result['status'];
+            $error_code = $result['error_code'];
+            $app_id = $result['app_id'];
+            $success = $result['success'];
+            dump($result);
+
+            if ($error_code == 'SUCCESS') {
+                // 获取信用分
+                $result = $client->getCreditScore($open_id);
+                dump($result);
+            }
+        }
     }
 
     public function cancelAction()

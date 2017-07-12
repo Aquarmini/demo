@@ -3,7 +3,7 @@ class Lotus
 {
 	/**
 	 * Lotus Option array
-	 * 
+	 *
 	 * @var array array(
 	 * 	"proj_dir"     =>
 	 * 	"app_name"     =>
@@ -82,7 +82,7 @@ class Lotus
 		 * init Config
 		 */
 		$this->prepareConfig();
-		
+
 		/**
 		 * Run dispatcher when under MVC mode
 		 */
@@ -102,7 +102,13 @@ class Lotus
 		$autoloader->autoloadPath[] = $this->lotusRuntimeDir;
 		if (isset($this->option["autoload_dir"]))
 		{
-			$autoloader->autoloadPath[] = $this->option["autoload_dir"];
+		    if(is_array($this->option["autoload_dir"])){
+		        foreach($this->option["autoload_dir"] as $dir){
+                    $autoloader->autoloadPath[] = $dir;
+                }
+            }else{
+                $autoloader->autoloadPath[] = $this->option["autoload_dir"];
+            }
 		}
 		if ($this->proj_dir)
 		{
