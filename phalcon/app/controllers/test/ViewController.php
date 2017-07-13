@@ -56,5 +56,10 @@ class ViewController extends Controller
         return self::success(['request' => $data, 'name' => $name]);
     }
 
+    public function vueAction()
+    {
+        return $this->view->render('test/view', 'vue');
+    }
+
 }
 

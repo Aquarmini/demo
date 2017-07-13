@@ -54,6 +54,7 @@
                    href="{{ url('test/search_engine/index') }}">双峰控制器测试路由search_engine</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/api/filter') }}">参数Filter测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/api/validation') }}">参数Validation测试</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/view/vue') }}">vue支持</a>
 
             </div>
             <div class="col-md-12">
